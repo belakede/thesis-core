@@ -12,8 +12,4 @@ public interface RoomField extends Field {
 
     Optional<Room> getSecretRoom();
 
-    Optional<Field> getSecretRoomField();
-
-    Set<Field> getExitFields();
-
 }

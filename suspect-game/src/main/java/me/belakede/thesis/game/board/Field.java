@@ -1,0 +1,15 @@
+package me.belakede.thesis.game.board;
+
+import java.io.Serializable;
+
+public interface Field extends Serializable {
+
+    FieldType getType();
+
+    int getRow();
+
+    int getColumn();
+
+    boolean canMakeAnAccusation();
+
+}

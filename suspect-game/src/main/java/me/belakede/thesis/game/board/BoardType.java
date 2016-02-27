@@ -2,26 +2,20 @@ package me.belakede.thesis.game.board;
 
 public enum BoardType {
 
-    DEFAULT("default", 27, 27),
+    DEFAULT("default", 27),
 
-    ADVANCED("advanced", 27, 27);
+    ADVANCED("advanced", 27);
 
     private final String filename;
-    private final int rows;
-    private final int columns;
+    private final int size;
 
-    BoardType(String filename, int rows, int columns) {
+    BoardType(String filename, int size) {
         this.filename = filename;
-        this.rows = rows;
-        this.columns = columns;
+        this.size = size;
     }
 
-    public int getRows() {
-        return rows;
-    }
-
-    public int getColumns() {
-        return columns;
+    public int getSize() {
+        return size;
     }
 
     @Override

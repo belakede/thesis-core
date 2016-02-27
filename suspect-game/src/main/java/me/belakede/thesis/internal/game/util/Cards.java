@@ -6,64 +6,61 @@ import java.util.*;
 
 public class Cards {
 
-    private Cards() {}
-
-    private static final EnumSet<Room> ROOMS;
-
-    private static final EnumSet<Suspect> SUSPECTS;
-
-    private static final EnumSet<Weapon> WEAPONS;
-
-    private static final Set<Card> CARDS;
-
+    private static final EnumSet<Room> ROOM_CARDS;
+    private static final EnumSet<Suspect> SUSPECT_CARDS;
+    private static final EnumSet<Weapon> WEAPON_CARDS;
+    private static final Set<Card> ALL_CARDS;
     private static final Random RANDOM;
-
     private static final Map<String, String> NAME_CACHE;
 
     static {
-        ROOMS = EnumSet.allOf(Room.class);
-        SUSPECTS = EnumSet.allOf(Suspect.class);
-        WEAPONS = EnumSet.allOf(Weapon.class);
-        CARDS = initCards();
+        ROOM_CARDS = EnumSet.allOf(Room.class);
+        SUSPECT_CARDS = EnumSet.allOf(Suspect.class);
+        WEAPON_CARDS = EnumSet.allOf(Weapon.class);
+        ALL_CARDS = initCards();
         RANDOM = new Random();
-        NAME_CACHE = new HashMap<>(CARDS.size());
+        NAME_CACHE = new HashMap<>(ALL_CARDS.size());
     }
+
+    private Cards() {}
 
     public static Optional<Card> valueOf(String name) {
         return (name == null)
                 ? Optional.empty()
-                : CARDS.stream().filter(card -> card.toString().equals(getCachedName(name))).findFirst();
+                : ALL_CARDS.stream().filter(card -> card.toString().equals(getCachedName(name))).findFirst();
     }
 
     public static Set<Card> values() {
-        return Collections.unmodifiableSet(CARDS);
+        return Collections.unmodifiableSet(ALL_CARDS);
     }
 
     public static List<Card> shuffledValuesExcept(Case mystery) {
-        if (mystery == null) throw new NullPointerException();
-        List<Card> filteredCards = new ArrayList<>(CARDS);
+        if (mystery == null) {
+            throw new NullPointerException();
+        }
+        List<Card> filteredCards = new ArrayList<>(ALL_CARDS);
         removeFromList(filteredCards, mystery);
         shuffle(filteredCards);
         return Collections.unmodifiableList(filteredCards);
     }
 
     public static Optional<Room> getRandomRoom() {
-        return ROOMS.stream().skip(RANDOM.nextInt(ROOMS.size())).findFirst();
+        return ROOM_CARDS.stream().skip(RANDOM.nextInt(ROOM_CARDS.size())).findFirst();
     }
 
     public static Optional<Suspect> getRandomSuspect() {
-        return SUSPECTS.stream().skip(RANDOM.nextInt(SUSPECTS.size())).findFirst();
+        return SUSPECT_CARDS.stream().skip(RANDOM.nextInt(SUSPECT_CARDS.size())).findFirst();
     }
 
     public static Optional<Weapon> getRandomWeapon() {
-        return WEAPONS.stream().skip(RANDOM.nextInt(WEAPONS.size())).findFirst();
+        return WEAPON_CARDS.stream().skip(RANDOM.nextInt(WEAPON_CARDS.size())).findFirst();
     }
 
     private static Set<Card> initCards() {
         Set<Card> cards = new HashSet<>();
-        cards.addAll(ROOMS);
-        cards.addAll(SUSPECTS);
-        cards.addAll(WEAPONS);
+        cards.addAll(ROOM_CARDS);
+        cards.addAll(SUSPECT_CARDS);
+        cards.addAll(WEAPON_CARDS);
         return cards;
     }
 

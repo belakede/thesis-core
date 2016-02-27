@@ -7,21 +7,21 @@ public enum BoardType {
     ADVANCED("advanced", 27, 27);
 
     private final String filename;
-    private final int N;
-    private final int M;
+    private final int rows;
+    private final int columns;
 
     BoardType(String filename, int rows, int columns) {
         this.filename = filename;
-        this.N = rows;
-        this.M = columns;
+        this.rows = rows;
+        this.columns = columns;
     }
 
-    public int getN() {
-        return N;
+    public int getRows() {
+        return rows;
     }
 
-    public int getM() {
-        return M;
+    public int getColumns() {
+        return columns;
     }
 
     @Override

@@ -1,6 +1,7 @@
 package me.belakede.thesis.game.board;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.Set;
 
 public interface Board extends Serializable {
@@ -9,7 +10,7 @@ public interface Board extends Serializable {
 
     Set<Field> getStartingFields();
 
-    Set<Field> getRoomFields();
+    List<Field> getRoomFields();
 
     boolean isAvailable(Field from, Field to);
 

@@ -7,9 +7,13 @@ import me.belakede.thesis.game.equipment.Suspicion;
 public interface Game {
 
     Board getBoard();
+
     void roll();
+
     void move(Field field);
+
     void suspect(Suspicion suspicion);
+
     void accuse(Suspicion suspicion);
 
 }

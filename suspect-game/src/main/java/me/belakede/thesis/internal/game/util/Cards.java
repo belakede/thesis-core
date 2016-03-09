@@ -22,7 +22,8 @@ public class Cards {
         NAME_CACHE = new HashMap<>(ALL_CARDS.size());
     }
 
-    private Cards() {}
+    private Cards() {
+    }
 
     public static Optional<Card> valueOf(String name) {
         return (name == null)

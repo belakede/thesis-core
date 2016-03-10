@@ -122,5 +122,16 @@ public class CardsTest {
         assertTrue(weapons.contains(actual.get()));
     }
 
-
+    @Test
+    public void testGetNumberOfCardsShouldReturnTheNumberOfRoomsPlusNumberOfWeaponsPlusNumberOfSuspects() throws Exception {
+        // GIVEN
+        int numberOfRooms = Room.values().length;
+        int numberOfSuspects = Suspect.values().length;
+        int numberOfWeapons = Weapon.values().length;
+        // WHEN
+        int actual = Cards.getNumberOfCard();
+        // THEN
+        int expected = numberOfRooms + numberOfWeapons + numberOfSuspects;
+        assertEquals(expected, actual);
+    }
 }

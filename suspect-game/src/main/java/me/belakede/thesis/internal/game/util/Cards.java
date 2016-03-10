@@ -35,6 +35,10 @@ public class Cards {
         return Collections.unmodifiableSet(ALL_CARDS);
     }
 
+    public static int getNumberOfCard() {
+        return ALL_CARDS.size();
+    }
+
     public static List<Card> shuffledValuesExcept(Case mystery) {
         if (mystery == null) {
             throw new NullPointerException();

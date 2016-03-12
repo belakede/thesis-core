@@ -5,21 +5,18 @@ import me.belakede.thesis.game.board.FieldType;
 
 public final class DefaultField implements Field {
 
-    private final FieldType type;
+    private final FieldType fieldType;
     private final int row;
     private final int column;
-    private final boolean accusationField;
 
-    DefaultField(FieldType type, int row, int column, boolean accusationField) {
-        this.type = type;
+    DefaultField(FieldType fieldType, int row, int column) {
+        this.fieldType = fieldType;
         this.row = row;
         this.column = column;
-        this.accusationField = accusationField;
     }
 
-    @Override
-    public FieldType getType() {
-        return type;
+    public FieldType getFieldType() {
+        return fieldType;
     }
 
     @Override
@@ -34,46 +31,33 @@ public final class DefaultField implements Field {
 
     @Override
     public boolean canMakeAnAccusation() {
-        return accusationField;
+        return FieldType.END.equals(fieldType);
     }
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
 
         DefaultField that = (DefaultField) o;
 
-        if (row != that.row) {
-            return false;
-        }
-        if (column != that.column) {
-            return false;
-        }
-        return accusationField == that.accusationField && type == that.type;
-
+        return row == that.row && column == that.column && fieldType == that.fieldType;
     }
 
     @Override
     public int hashCode() {
-        int result = type.hashCode();
+        int result = fieldType.hashCode();
         result = 31 * result + row;
         result = 31 * result + column;
-        result = 31 * result + (accusationField ? 1 : 0);
         return result;
     }
 
     @Override
     public String toString() {
         return "Field{" +
-                "type: " + type +
-                ", row: " + row +
-                ", column: " + column +
-                ", accusationField: " + accusationField +
+                "fieldType=" + fieldType +
+                ", row=" + row +
+                ", column=" + column +
                 '}';
     }
 }

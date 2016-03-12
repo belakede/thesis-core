@@ -125,10 +125,10 @@ public class FieldMatrixTest {
         Field[][] matrix = getFieldMatrix(2);
         Field field = matrix[1][1];
         // WHEN
-        Mockito.when(field.getType()).thenReturn(FieldType.START);
+        Mockito.when(field.getFieldType()).thenReturn(FieldType.START);
         FieldMatrix testSubject = new FieldMatrix(3, matrix);
         // THEN
-        Mockito.verify(field).getType();
+        Mockito.verify(field).getFieldType();
         Set<Field> expected = new HashSet<>(Arrays.asList(field));
         Set<Field> actual = testSubject.getStartingFields();
 
@@ -143,12 +143,12 @@ public class FieldMatrixTest {
         Field firstField = matrix[0][0];
         Field secondField = matrix[1][1];
         // WHEN
-        Mockito.when(firstField.getType()).thenReturn(FieldType.START);
-        Mockito.when(secondField.getType()).thenReturn(FieldType.START);
+        Mockito.when(firstField.getFieldType()).thenReturn(FieldType.START);
+        Mockito.when(secondField.getFieldType()).thenReturn(FieldType.START);
         FieldMatrix testSubject = new FieldMatrix(3, matrix);
         // THEN
-        Mockito.verify(firstField).getType();
-        Mockito.verify(secondField).getType();
+        Mockito.verify(firstField).getFieldType();
+        Mockito.verify(secondField).getFieldType();
         Set<Field> expected = new HashSet<>(Arrays.asList(firstField, secondField));
         Set<Field> actual = testSubject.getStartingFields();
 

@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 public interface Field extends Serializable {
 
-    FieldType getType();
+    FieldType getFieldType();
 
     int getRow();
 

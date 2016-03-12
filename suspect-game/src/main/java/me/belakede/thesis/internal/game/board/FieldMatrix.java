@@ -73,7 +73,7 @@ final class FieldMatrix implements Serializable {
         for (int i = 0; i < fields.length; i++) {
             for (int j = 0; j < fields[i].length; j++) {
                 indices.put(fields[i][j], new IndexPair(i, j));
-                if (FieldType.START.equals(fields[i][j].getType())) {
+                if (FieldType.START.equals(fields[i][j].getFieldType())) {
                     startingFields.add(fields[i][j]);
                 } else if (fields[i][j] instanceof RoomField) {
                     roomFields.add(fields[i][j]);

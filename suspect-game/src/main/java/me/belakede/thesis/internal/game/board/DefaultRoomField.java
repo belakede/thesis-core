@@ -44,6 +44,7 @@ public class DefaultRoomField implements RoomField {
         return Optional.of(room);
     }
 
+    @Override
     public FieldType getFieldType() {
         return FieldType.ROOM;
     }
@@ -64,9 +65,10 @@ public class DefaultRoomField implements RoomField {
 
         DefaultRoomField that = (DefaultRoomField) o;
 
-        return !(row != that.row || column != that.column || room != that.room)
-                && (secretRoom != null ? secretRoom.equals(that.secretRoom) : that.secretRoom == null);
-
+        boolean differentPosition = (row != that.row || column != that.column);
+        boolean differentRoom = (room != that.room);
+        boolean differentSecretRoom = (secretRoom == null || !secretRoom.equals(that.secretRoom));
+        return !differentPosition && !differentRoom && !differentSecretRoom;
     }
 
     @Override

@@ -48,14 +48,16 @@ public final class DefaultPlayer implements Player {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
 
         DefaultPlayer that = (DefaultPlayer) o;
 
-        if (!cards.equals(that.cards)) return false;
-        return figurine == that.figurine;
-
+        return cards.equals(that.cards) && figurine == that.figurine;
     }
 
     @Override

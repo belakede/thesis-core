@@ -35,14 +35,16 @@ public final class DefaultSuspicion implements Suspicion {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
 
         DefaultSuspicion that = (DefaultSuspicion) o;
 
-        if (suspect != that.suspect) return false;
-        if (room != that.room) return false;
-        return weapon == that.weapon;
+        return !(suspect != that.suspect || room != that.room) && weapon == that.weapon;
 
     }
 

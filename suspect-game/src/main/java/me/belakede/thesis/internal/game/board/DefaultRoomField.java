@@ -65,9 +65,9 @@ public class DefaultRoomField implements RoomField {
 
         DefaultRoomField that = (DefaultRoomField) o;
 
-        boolean differentPosition = (row != that.row || column != that.column);
-        boolean differentRoom = (room != that.room);
-        boolean differentSecretRoom = (secretRoom == null || !secretRoom.equals(that.secretRoom));
+        boolean differentPosition = row != that.row || column != that.column;
+        boolean differentRoom = room != that.room;
+        boolean differentSecretRoom = secretRoom == null || !secretRoom.equals(that.secretRoom);
         return !differentPosition && !differentRoom && !differentSecretRoom;
     }
 

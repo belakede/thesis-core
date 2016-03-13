@@ -2,110 +2,88 @@ package me.belakede.thesis.internal.game.board;
 
 import me.belakede.thesis.game.board.Field;
 import me.belakede.thesis.game.board.FieldType;
-import me.belakede.thesis.game.board.RoomField;
 
-import java.io.Serializable;
 import java.util.*;
 
-final class FieldMatrix implements Serializable {
+final class FieldMatrix {
 
     public static final int MAX_DISTANCE = 12;
 
     private final int size;
     private final Field[][] fields;
-    private transient List<Field> roomFields;
-    private transient Set<Field> startingFields;
-    private transient Map<Field, IndexPair> indices;
+    private final Set<Field> startingFields;
+    private final Map<Field, Neighbourhood> fieldNeighbourhoodMap;
 
-    public FieldMatrix(FieldMatrix another) {
-        this(another.size, another.fields);
+    public FieldMatrix(FieldMatrix matrix) {
+        this(matrix.size, matrix.fields);
     }
 
     public FieldMatrix(int size, Field[][] fields) {
         this.size = size;
         this.fields = fields;
-        this.indices = new HashMap<>();
-        this.roomFields = new ArrayList<>();
         this.startingFields = new HashSet<>();
-        uploadHelperFields();
-    }
-
-    public List<Field> getRoomFields() {
-        checkHelpers();
-        return new ArrayList<>(roomFields);
-    }
-
-    private void checkHelpers() {
-        if (indices == null) {
-            uploadHelperFields();
-        }
+        this.fieldNeighbourhoodMap = new HashMap<>();
+        initStartingFields();
+        initFieldNeighbourhoodMap();
     }
 
     public Set<Field> getStartingFields() {
-        checkHelpers();
-        return new HashSet<>(startingFields);
+        return Collections.unmodifiableSet(startingFields);
     }
 
     public boolean isAvailable(Field from, Field to) {
-        checkHelpers();
-        return indices.get(from).getDistance(indices.get(to)) <= MAX_DISTANCE;
+        return getAvailableFields(from).contains(to);
     }
 
-    public Set<Field> getAvailableFields(Field from, int step) {
-        checkHelpers();
-        Set<Field> availableFields = new HashSet<>();
-        IndexPair indexPair = indices.get(from);
-        int startRowIndex = Math.max(indexPair.getRow() - step - 1, 0);
-        int startColumnIndex = Math.max(indexPair.getColumn() - step - 1, 0);
-        int endRowIndex = Math.min(indexPair.getRow() + step + 1, size);
-        int endColumnIndex = Math.min(indexPair.getColumn() + step + 1, size);
-        for (int i = startRowIndex; i < endRowIndex; i++) {
-            for (int j = startColumnIndex; j < endColumnIndex; j++) {
-                if (indexPair.getDistance(i, j) <= step) {
-                    availableFields.add(fields[i][j]);
-                }
-            }
+    public Set<Field> getAvailableFields(Field from) {
+        return getAvailableFields(from, MAX_DISTANCE);
+    }
+
+    public Set<Field> getAvailableFields(Field from, int distance) {
+        Map<Field, Integer> visited = new HashMap<>();
+        return getAvailableFields(from, visited, distance);
+    }
+
+    private Set<Field> getAvailableFields(Field from, Map<Field, Integer> visited, int distance) {
+        Set<Field> result = new HashSet<>();
+        if (distance >= 0) {
+            result.add(from);
+            visited.put(from, distance);
+            Set<Field> neighbours = fieldNeighbourhoodMap.get(from).getNeighbours();
+            neighbours.stream()
+                    .filter(f -> !visited.containsKey(f) || visited.get(f) < distance)
+                    .map(f -> getAvailableFields(f, visited, distance - 1))
+                    .forEach(result::addAll);
         }
-        return availableFields;
+        return result;
     }
 
-    private void uploadHelperFields() {
-        for (int i = 0; i < fields.length; i++) {
-            for (int j = 0; j < fields[i].length; j++) {
-                indices.put(fields[i][j], new IndexPair(i, j));
+    private void initStartingFields() {
+        for (int i = 0; i < size; i++) {
+            for (int j = 0; j < size; j++) {
                 if (FieldType.START.equals(fields[i][j].getFieldType())) {
                     startingFields.add(fields[i][j]);
-                } else if (fields[i][j] instanceof RoomField) {
-                    roomFields.add(fields[i][j]);
                 }
             }
         }
     }
 
-    private static final class IndexPair {
-        private final int row;
-        private final int column;
-
-        public IndexPair(int row, int column) {
-            this.row = row;
-            this.column = column;
+    private void initFieldNeighbourhoodMap() {
+        for (int i = 0; i < size; i++) {
+            for (int j = 0; j < size; j++) {
+                if (!FieldType.WALL.equals(fields[i][j].getFieldType())) {
+                    fieldNeighbourhoodMap.put(fields[i][j], getNeighbourhood(i, j));
+                }
+            }
         }
+    }
 
-        public int getRow() {
-            return row;
-        }
-
-        public int getColumn() {
-            return column;
-        }
-
-        public int getDistance(IndexPair other) {
-            return Math.abs(row - other.row) + Math.abs(column - other.column);
-        }
-
-        public int getDistance(int otherRow, int otherColumn) {
-            return Math.abs(row - otherRow) + Math.abs(column - otherColumn);
-        }
+    private Neighbourhood getNeighbourhood(int row, int column) {
+        Field top = row == 0 ? null : fields[row - 1][column];
+        Field right = column == size - 1 ? null : fields[row][column + 1];
+        Field bottom = row == size - 1 ? null : fields[row + 1][column];
+        Field left = column == 0 ? null : fields[row][column - 1];
+        return new Neighbourhood(top, right, bottom, left);
     }
 
 }

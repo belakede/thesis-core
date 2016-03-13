@@ -2,16 +2,26 @@ package me.belakede.thesis.game.board;
 
 public enum FieldType {
 
-    WALL,
+    WALL('W'),
 
-    ROOM,
+    ROOM('R'),
 
-    SIMPLE,
+    SIMPLE('F'),
 
-    START,
+    START('S'),
 
-    END,
+    END('E'),
 
-    NULL
+    NULL('.');
+
+    private final char symbol;
+
+    FieldType(char symbol) {
+        this.symbol = symbol;
+    }
+
+    public char getSymbol() {
+        return symbol;
+    }
 
 }

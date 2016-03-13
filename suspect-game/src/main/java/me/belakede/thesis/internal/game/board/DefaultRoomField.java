@@ -1,37 +1,25 @@
 package me.belakede.thesis.internal.game.board;
 
-import me.belakede.thesis.game.board.FieldType;
+import me.belakede.thesis.game.board.Field;
 import me.belakede.thesis.game.board.RoomField;
 import me.belakede.thesis.game.equipment.Room;
 
-import java.util.Optional;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Set;
 
 public class DefaultRoomField implements RoomField {
 
-    private final int row;
-    private final int column;
     private final Room room;
-    private final Room secretRoom;
+    private final Set<Field> fields;
+    private final Set<Field> exitFields;
 
-    DefaultRoomField(Room room, int row, int column) {
-        this(room, null, row, column);
-    }
-
-    DefaultRoomField(Room room, Room secretRoom, int row, int column) {
+    DefaultRoomField(Room room, Collection<Field> fields, Collection<Field> exitFields) {
         this.room = room;
-        this.row = row;
-        this.column = column;
-        this.secretRoom = secretRoom;
-    }
-
-    @Override
-    public int getRow() {
-        return row;
-    }
-
-    @Override
-    public int getColumn() {
-        return column;
+        this.fields = new HashSet<>(fields);
+        this.exitFields = new HashSet<>(exitFields);
+        this.fields.addAll(exitFields);
     }
 
     @Override
@@ -40,18 +28,18 @@ public class DefaultRoomField implements RoomField {
     }
 
     @Override
-    public Optional<Room> getSecretRoom() {
-        return Optional.of(room);
+    public Set<Field> getFields() {
+        return Collections.unmodifiableSet(fields);
     }
 
     @Override
-    public FieldType getFieldType() {
-        return FieldType.ROOM;
+    public Set<Field> getExitFields() {
+        return Collections.unmodifiableSet(exitFields);
     }
 
     @Override
-    public boolean canMakeAnAccusation() {
-        return false;
+    public boolean isPartOfRoom(Field field) {
+        return fields.contains(field);
     }
 
     @Override
@@ -65,28 +53,20 @@ public class DefaultRoomField implements RoomField {
 
         DefaultRoomField that = (DefaultRoomField) o;
 
-        boolean differentPosition = row != that.row || column != that.column;
-        boolean differentRoom = room != that.room;
-        boolean differentSecretRoom = secretRoom == null || !secretRoom.equals(that.secretRoom);
-        return !differentPosition && !differentRoom && !differentSecretRoom;
+        return room == that.room;
     }
 
     @Override
     public int hashCode() {
-        int result = row;
-        result = 31 * result + column;
-        result = 31 * result + room.hashCode();
-        result = 31 * result + (secretRoom != null ? secretRoom.hashCode() : 0);
-        return result;
+        return room.hashCode();
     }
 
     @Override
     public String toString() {
         return "RoomField{" +
-                "row: " + row +
-                ", column: " + column +
-                ", room: " + room +
-                ", secretRoom: " + secretRoom +
+                "room=" + room +
+                ", fields=" + fields +
+                ", exitFields=" + exitFields +
                 '}';
     }
 }

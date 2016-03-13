@@ -2,13 +2,17 @@ package me.belakede.thesis.game.board;
 
 import me.belakede.thesis.game.equipment.Room;
 
-import java.util.Optional;
+import java.util.Set;
 
 
-public interface RoomField extends Field {
+public interface RoomField {
 
     Room getRoom();
 
-    Optional<Room> getSecretRoom();
+    Set<Field> getFields();
+
+    Set<Field> getExitFields();
+
+    boolean isPartOfRoom(Field field);
 
 }

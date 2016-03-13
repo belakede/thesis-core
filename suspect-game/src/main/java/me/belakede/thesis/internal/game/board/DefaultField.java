@@ -21,16 +21,6 @@ public final class DefaultField implements Field {
     }
 
     @Override
-    public int getRow() {
-        return row;
-    }
-
-    @Override
-    public int getColumn() {
-        return column;
-    }
-
-    @Override
     public boolean canMakeAnAccusation() {
         return FieldType.END.equals(fieldType);
     }

@@ -6,6 +6,7 @@ import me.belakede.thesis.game.equipment.Card;
 import me.belakede.thesis.game.equipment.Suspect;
 
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -33,7 +34,7 @@ public final class DefaultPlayer implements Player {
 
     @Override
     public Set<Card> getCards() {
-        return new HashSet<>(cards);
+        return Collections.unmodifiableSet(cards);
     }
 
     @Override
@@ -69,7 +70,7 @@ public final class DefaultPlayer implements Player {
 
     @Override
     public String toString() {
-        return "DefaultPlayer{" +
+        return "Player{" +
                 "figurine=" + figurine +
                 ", madeGroundlessAccusation=" + madeGroundlessAccusation +
                 '}';

@@ -185,7 +185,7 @@ public class DefaultRoomFieldTest {
     }
 
     @Test
-    public void testEqualsShouldReturnTrueWhenArgumentIsSimilarSuspicion() throws Exception {
+    public void testEqualsShouldReturnTrueWhenArgumentIsSimilarRoomField() throws Exception {
         // GIVEN
         Set<Field> fields = new HashSet<>(Arrays.asList(
                 Mockito.mock(Field.class), Mockito.mock(Field.class),

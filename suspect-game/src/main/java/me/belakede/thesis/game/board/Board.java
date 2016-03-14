@@ -1,16 +1,14 @@
 package me.belakede.thesis.game.board;
 
-import java.io.Serializable;
-import java.util.List;
 import java.util.Set;
 
-public interface Board extends Serializable {
+public interface Board {
 
     BoardType getBoardType();
 
     Set<Field> getStartingFields();
 
-    List<Field> getRoomFields();
+    Set<RoomField> getRoomFields();
 
     boolean isAvailable(Field from, Field to);
 

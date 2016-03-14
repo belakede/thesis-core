@@ -5,7 +5,7 @@ import me.belakede.thesis.game.board.FieldType;
 
 import java.util.*;
 
-final class FieldMatrix {
+class FieldMatrix {
 
     public static final int MAX_DISTANCE = 12;
 

@@ -15,6 +15,13 @@ public final class DefaultBoard implements Board {
     private final Set<SecretPassage> secretPassages;
     private final FieldMatrix fieldMatrix;
 
+    public DefaultBoard(BoardType type, Field[][] fields, Set<RoomField> roomFields, Set<SecretPassage> secretPassages) {
+        this.type = type;
+        this.fieldMatrix = new FieldMatrix(fields.length, fields);
+        this.roomFields = new HashSet<>(roomFields);
+        this.secretPassages = new HashSet<>(secretPassages);
+    }
+
     public DefaultBoard(BoardType type, FieldMatrix fieldMatrix, Set<RoomField> roomFields, Set<SecretPassage> secretPassages) {
         this.type = type;
         this.fieldMatrix = new FieldMatrix(fieldMatrix);

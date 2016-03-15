@@ -15,7 +15,7 @@ public final class DefaultPairOfDice implements PairOfDice {
         this.second = second;
     }
 
-    public static final PairOfDice create() {
+    public static PairOfDice create() {
         ThreadLocalRandom random = ThreadLocalRandom.current();
         return new DefaultPairOfDice(random.nextInt(6) + 1, random.nextInt(6) + 1);
     }
@@ -40,4 +40,24 @@ public final class DefaultPairOfDice implements PairOfDice {
         return create();
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+
+        DefaultPairOfDice that = (DefaultPairOfDice) o;
+
+        return first == that.first && second == that.second;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = 73 * first;
+        result = 73 * result + 73 * second;
+        return result;
+    }
 }

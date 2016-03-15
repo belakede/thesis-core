@@ -15,7 +15,7 @@ public class DefaultRoomField implements RoomField {
     private final Set<Field> fields;
     private final Set<Field> exitFields;
 
-    DefaultRoomField(Room room, Collection<Field> fields, Collection<Field> exitFields) {
+    public DefaultRoomField(Room room, Collection<Field> fields, Collection<Field> exitFields) {
         this.room = room;
         this.fields = new HashSet<>(fields);
         this.exitFields = new HashSet<>(exitFields);

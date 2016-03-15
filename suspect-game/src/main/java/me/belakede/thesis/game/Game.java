@@ -16,11 +16,17 @@ public interface Game {
 
     PairOfDice roll();
 
+    Player getCurrentPlayer();
+
+    Player getNextPlayer();
+
     void move(Field field);
 
     void suspect(Suspicion suspicion);
 
     void accuse(Suspicion suspicion);
+
+    void next();
 
     boolean isGameEnded();
 }

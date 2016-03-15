@@ -1,15 +1,14 @@
 package me.belakede.thesis.internal.game;
 
 import me.belakede.thesis.game.Game;
+import me.belakede.thesis.game.Player;
 import me.belakede.thesis.game.board.Board;
 import me.belakede.thesis.game.board.Field;
-import me.belakede.thesis.game.board.RoomField;
 import me.belakede.thesis.game.equipment.*;
 import me.belakede.thesis.internal.game.equipment.DefaultPairOfDice;
 import me.belakede.thesis.internal.game.util.Cases;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public final class DefaultGame implements Game {
 
@@ -38,7 +37,17 @@ public final class DefaultGame implements Game {
 
     @Override
     public Map<Figurine, Field> getPositions() {
-        return new HashMap<>(positions);
+        return Collections.unmodifiableMap(new HashMap<>(positions));
+    }
+
+    @Override
+    public Player getCurrentPlayer() {
+        return players.getCurrent();
+    }
+
+    @Override
+    public Player getNextPlayer() {
+        return players.getNext();
     }
 
     @Override
@@ -65,6 +74,12 @@ public final class DefaultGame implements Game {
     public void accuse(Suspicion suspicion) {
         changePositionsBySuspicion(suspicion);
         changeMysteryBySuspicion(suspicion);
+        changePlayerStatusIfMadeGroundlessAccusation();
+    }
+
+    @Override
+    public void next() {
+        players.next();
     }
 
     @Override
@@ -75,21 +90,33 @@ public final class DefaultGame implements Game {
     private void changePositionsBySuspicion(Suspicion suspicion) {
         Suspect suspect = suspicion.getSuspect();
         Weapon weapon = suspicion.getWeapon();
-        Field field = findRoomFieldByRoom(suspicion.getRoom());
-        positions.put(suspect, field);
-        positions.put(weapon, field);
+        Set<Field> fields = findRoomFieldByRoom(suspicion.getRoom());
+        if (!fields.isEmpty()) {
+            Optional<Field> firstEmptyField = fields.stream().filter(f -> !positions.containsValue(f)).findFirst();
+            if (!firstEmptyField.isPresent()) {
+                firstEmptyField = fields.stream().findAny();
+            }
+            positions.put(suspect, firstEmptyField.get());
+            positions.put(weapon, firstEmptyField.get());
+        }
     }
 
     private void changeMysteryBySuspicion(Suspicion suspicion) {
         mystery = mystery.accuse(suspicion);
     }
 
-    private RoomField findRoomFieldByRoom(Room room) {
-        return board.getRoomFields()
-                .stream()
-                .map(field -> (RoomField) field)
-                .filter(roomField -> room.equals(roomField.getRoom()))
-                .findFirst()
-                .get();
+    private void changePlayerStatusIfMadeGroundlessAccusation() {
+        if (!mystery.isSolved()) {
+            players.getCurrent().makeGroundlessAccusation();
+        }
+    }
+
+    private Set<Field> findRoomFieldByRoom(Room room) {
+        Set<Field> fields = new HashSet<>();
+        board.getRoomFields().stream()
+                .filter(rf -> rf.getRoom().equals(room))
+                .map(rf -> rf.getFields())
+                .forEach(fields::addAll);
+        return fields;
     }
 }

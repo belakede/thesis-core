@@ -58,9 +58,9 @@ public class DescriptorTransformer {
     }
 
     private RoomField transformRoomDescriptor(RoomFieldDescriptor descriptor) {
-        Set<Field> fields = descriptor.getFields().stream().map(this::transformField).collect(Collectors.toSet());
+        Set<Field> actualFields = descriptor.getFields().stream().map(this::transformField).collect(Collectors.toSet());
         Set<Field> exitFields = descriptor.getExitFields().stream().map(this::transformField).collect(Collectors.toSet());
-        return new DefaultRoomField(descriptor.getRoom(), fields, exitFields);
+        return new DefaultRoomField(descriptor.getRoom(), actualFields, exitFields);
     }
 
     private SecretPassage transformSecretPassageDescriptor(SecretPassageDescriptor descriptor) {

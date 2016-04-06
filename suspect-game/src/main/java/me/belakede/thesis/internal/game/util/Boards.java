@@ -4,17 +4,22 @@ import me.belakede.thesis.game.board.Board;
 import me.belakede.thesis.game.board.BoardType;
 import me.belakede.thesis.internal.game.importer.MapLoader;
 
+import java.io.IOException;
+
 public class Boards {
 
-    public static Board getDefaultBoard() throws Exception {
+    private Boards() {
+    }
+
+    public static Board getDefaultBoard() throws IOException {
         return getBoardByType(BoardType.DEFAULT);
     }
 
-    public static Board getAdvancedBoard() throws Exception {
+    public static Board getAdvancedBoard() throws IOException {
         return getBoardByType(BoardType.ADVANCED);
     }
 
-    private static Board getBoardByType(BoardType boardType) throws Exception {
+    private static Board getBoardByType(BoardType boardType) throws IOException {
         return new MapLoader(boardType).load();
     }
 

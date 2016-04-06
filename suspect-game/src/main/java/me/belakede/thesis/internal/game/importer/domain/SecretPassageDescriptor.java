@@ -8,6 +8,7 @@ public class SecretPassageDescriptor {
     private Room toField;
 
     public SecretPassageDescriptor() {
+        // do nothing because default constructor needed and fields can be null
     }
 
     public SecretPassageDescriptor(Room fromField, Room toField) {

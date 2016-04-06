@@ -8,6 +8,7 @@ public class RoomDescription {
     private List<SecretPassageDescriptor> secretPassages;
 
     public RoomDescription() {
+        // do nothing because default constructor needed and fields can be null
     }
 
     public List<RoomFieldDescriptor> getRoomFields() {

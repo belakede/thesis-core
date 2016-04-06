@@ -11,6 +11,7 @@ public class RoomFieldDescriptor {
     private List<List<Integer>> exitFields;
 
     public RoomFieldDescriptor() {
+        // do nothing because default constructor needed and fields can be null
     }
 
     public Room getRoom() {

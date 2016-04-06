@@ -53,7 +53,14 @@ public class DefaultRoomField implements RoomField {
 
         DefaultRoomField that = (DefaultRoomField) o;
 
-        return room == that.room;
+        if (room != that.room) {
+            return false;
+        }
+        if (fields != null ? !fields.equals(that.fields) : that.fields != null) {
+            return false;
+        }
+        return exitFields != null ? exitFields.equals(that.exitFields) : that.exitFields == null;
+
     }
 
     @Override

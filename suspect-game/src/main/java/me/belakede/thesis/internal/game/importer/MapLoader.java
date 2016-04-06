@@ -26,7 +26,7 @@ public class MapLoader {
         this.boardType = boardType;
     }
 
-    public Board load() throws IOException {
+    public Board load() throws Exception {
         Field[][] fields = loadFields();
         RoomDescription roomDescription = loadRoomDescription();
         DescriptorTransformer transformer = new DescriptorTransformer(fields, roomDescription);

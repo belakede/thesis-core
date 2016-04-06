@@ -29,7 +29,8 @@ public final class DefaultSecretPassage implements SecretPassage {
 
         DefaultSecretPassage that = (DefaultSecretPassage) o;
 
-        return fromField.equals(that.fromField) && toField.equals(that.toField);
+        return (fromField.equals(that.fromField) && toField.equals(that.toField))
+                || (fromField.equals(that.toField) && toField.equals(that.fromField));
     }
 
     @Override

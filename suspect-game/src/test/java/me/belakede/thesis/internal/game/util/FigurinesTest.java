@@ -70,7 +70,7 @@ public class FigurinesTest {
     @Test
     public void testStartingPositionsShouldReturnAMapWhereThereIsNoNullValue() throws Exception {
         // GIVEN
-        Board board = Boards.getAdvancedBoard();
+        Board board = Boards.getDefaultBoard();
         // WHEN
         Collection<Field> actual = Figurines.startingPositions(board).values();
         // THEN

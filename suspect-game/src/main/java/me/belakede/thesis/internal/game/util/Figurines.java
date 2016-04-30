@@ -1,5 +1,7 @@
 package me.belakede.thesis.internal.game.util;
 
+import me.belakede.thesis.game.board.Board;
+import me.belakede.thesis.game.board.Field;
 import me.belakede.thesis.game.equipment.*;
 
 import java.util.*;
@@ -35,6 +37,34 @@ public class Figurines {
             playersCards.values().forEach(c -> c.add(cards.remove(0)));
         }
         return playersCards;
+    }
+
+
+    public static Map<Figurine, Field> startingPositions(Board board) {
+        Map<Figurine, Field> figurineFieldMap = new Hashtable<>(getNumberOfFigurines());
+        addSuspectsToPositionMap(board, figurineFieldMap);
+        addWeaponsToPositionMap(board, figurineFieldMap);
+        return figurineFieldMap;
+    }
+
+    private static void addWeaponsToPositionMap(Board board, Map<Figurine, Field> figurineFieldMap) {
+        List<Field> roomFields = new ArrayList<>();
+        board.getRoomFields().forEach(rf -> roomFields.addAll(rf.getFields()));
+        List<Weapon> weapons = new ArrayList<>(WEAPON_FIGURINES);
+        while (!weapons.isEmpty()) {
+            Collections.shuffle(roomFields);
+            figurineFieldMap.put(weapons.remove(0), roomFields.remove(0));
+        }
+    }
+
+    private static void addSuspectsToPositionMap(Board board, Map<Figurine, Field> figurineFieldMap) {
+        List<Field> startingFields = new ArrayList<>(board.getStartingFields());
+        List<Suspect> suspects = new ArrayList<>(SUSPECT_FIGURINES);
+        while (!suspects.isEmpty() && !startingFields.isEmpty()) {
+            Collections.shuffle(suspects);
+            Collections.shuffle(startingFields);
+            figurineFieldMap.put(suspects.remove(0), startingFields.remove(0));
+        }
     }
 
     private static Map<Figurine, Set<Card>> getFigurinesWithEmptyCardSet(int numberOfPlayers) {

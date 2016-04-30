@@ -1,15 +1,18 @@
 package me.belakede.thesis.internal.game.util;
 
-import me.belakede.thesis.game.equipment.Card;
-import me.belakede.thesis.game.equipment.Case;
-import me.belakede.thesis.game.equipment.Suspect;
-import me.belakede.thesis.game.equipment.Weapon;
+import me.belakede.thesis.game.board.Board;
+import me.belakede.thesis.game.board.Field;
+import me.belakede.thesis.game.equipment.*;
+import org.junit.Assert;
 import org.junit.Test;
 
+import java.util.Collection;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
 
 public class FigurinesTest {
 
@@ -51,6 +54,38 @@ public class FigurinesTest {
         expected.remove(mystery.getSuspect());
         expected.remove(mystery.getWeapon());
         assertEquals(expected, actual);
+    }
+
+    @Test
+    public void testStartingPositionsShouldReturnAMapWhichContainsAllFigurines() throws Exception {
+        // GIVEN
+        Board board = Boards.getDefaultBoard();
+        // WHEN
+        Set<Figurine> actual = Figurines.startingPositions(board).keySet();
+        // THEN
+        Set<Figurine> expected = Figurines.values();
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void testStartingPositionsShouldReturnAMapWhereThereIsNoNullValue() throws Exception {
+        // GIVEN
+        Board board = Boards.getAdvancedBoard();
+        // WHEN
+        Collection<Field> actual = Figurines.startingPositions(board).values();
+        // THEN
+        actual.forEach(Assert::assertNotNull);
+    }
+
+    @Test
+    public void testStartingPositionsShouldReturnADifferentMapAfterEveryCall() throws Exception {
+        // GIVEN
+        Board board = Boards.getDefaultBoard();
+        // WHEN
+        Map<Figurine, Field> first = Figurines.startingPositions(board);
+        Map<Figurine, Field> second = Figurines.startingPositions(board);
+        // THEN
+        assertNotEquals(first, second);
     }
 
 }

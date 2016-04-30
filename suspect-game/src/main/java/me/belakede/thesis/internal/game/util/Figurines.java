@@ -32,9 +32,13 @@ public class Figurines {
     public static Map<Figurine, Set<Card>> cards(int numberOfPlayers, Case mystery) {
         Map<Figurine, Set<Card>> playersCards = getFigurinesWithEmptyCardSet(numberOfPlayers);
         List<Card> cards = new ArrayList<>(Cards.shuffledValuesExcept(mystery));
-        while (!cards.isEmpty()) {
+        while (!cards.isEmpty() && cards.size() >= numberOfPlayers) {
             Collections.shuffle(cards);
             playersCards.values().forEach(c -> c.add(cards.remove(0)));
+        }
+        List<Set<Card>> cardList = new ArrayList<>(playersCards.values());
+        for (int i = 0; i < cards.size(); i++) {
+            cardList.get(i).add(cards.remove(0));
         }
         return playersCards;
     }
@@ -68,7 +72,7 @@ public class Figurines {
     }
 
     private static Map<Figurine, Set<Card>> getFigurinesWithEmptyCardSet(int numberOfPlayers) {
-        List<Figurine> figurines = new ArrayList<>(ALL_FIGURINES);
+        List<Figurine> figurines = new ArrayList<>(SUSPECT_FIGURINES);
         Collections.shuffle(figurines);
         Map<Figurine, Set<Card>> playersCards = new Hashtable<>(numberOfPlayers);
         for (int i = 0; i < numberOfPlayers; i++) {

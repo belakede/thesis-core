@@ -19,7 +19,7 @@ public class Boards {
         return getBoardByType(BoardType.ADVANCED);
     }
 
-    private static Board getBoardByType(BoardType boardType) throws IOException {
+    public static Board getBoardByType(BoardType boardType) throws IOException {
         return new MapLoader(boardType).load();
     }
 

@@ -1,8 +1,13 @@
 package me.belakede.thesis.internal.game.util;
 
+import me.belakede.thesis.game.equipment.Card;
+import me.belakede.thesis.game.equipment.Case;
 import me.belakede.thesis.game.equipment.Suspect;
 import me.belakede.thesis.game.equipment.Weapon;
 import org.junit.Test;
+
+import java.util.HashSet;
+import java.util.Set;
 
 import static org.junit.Assert.assertEquals;
 
@@ -31,4 +36,21 @@ public class FigurinesTest {
         int actual = Figurines.values().size();
         assertEquals(expected, actual);
     }
+
+    @Test
+    public void testFigurinesCardsShouldReturnAMapContainsAllCardsExceptTheSpecifiedMysterySeparatedByFigurines() {
+        // GIVEN
+        Case mystery = Cases.generate();
+        int numberOfPlayers = 6;
+        // WHEN
+        Set<Card> actual = new HashSet<>();
+        Figurines.cards(numberOfPlayers, mystery).values().forEach(actual::addAll);
+        // THEN
+        Set<Card> expected = new HashSet<>(Cards.values());
+        expected.remove(mystery.getRoom());
+        expected.remove(mystery.getSuspect());
+        expected.remove(mystery.getWeapon());
+        assertEquals(expected, actual);
+    }
+
 }

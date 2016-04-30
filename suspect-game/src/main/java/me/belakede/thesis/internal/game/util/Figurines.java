@@ -1,13 +1,8 @@
 package me.belakede.thesis.internal.game.util;
 
-import me.belakede.thesis.game.equipment.Figurine;
-import me.belakede.thesis.game.equipment.Suspect;
-import me.belakede.thesis.game.equipment.Weapon;
+import me.belakede.thesis.game.equipment.*;
 
-import java.util.Collections;
-import java.util.EnumSet;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 public class Figurines {
 
@@ -30,6 +25,26 @@ public class Figurines {
 
     public static Set<Figurine> values() {
         return Collections.unmodifiableSet(ALL_FIGURINES);
+    }
+
+    public static Map<Figurine, Set<Card>> cards(int numberOfPlayers, Case mystery) {
+        Map<Figurine, Set<Card>> playersCards = getFigurinesWithEmptyCardSet(numberOfPlayers);
+        List<Card> cards = new ArrayList<>(Cards.shuffledValuesExcept(mystery));
+        while (!cards.isEmpty()) {
+            Collections.shuffle(cards);
+            playersCards.values().forEach(c -> c.add(cards.remove(0)));
+        }
+        return playersCards;
+    }
+
+    private static Map<Figurine, Set<Card>> getFigurinesWithEmptyCardSet(int numberOfPlayers) {
+        List<Figurine> figurines = new ArrayList<>(ALL_FIGURINES);
+        Collections.shuffle(figurines);
+        Map<Figurine, Set<Card>> playersCards = new Hashtable<>(numberOfPlayers);
+        for (int i = 0; i < numberOfPlayers; i++) {
+            playersCards.put(figurines.get(i), new HashSet<>());
+        }
+        return playersCards;
     }
 
     private static Set<Figurine> initFigurines() {

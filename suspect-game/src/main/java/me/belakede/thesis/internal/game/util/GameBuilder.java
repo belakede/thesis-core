@@ -28,22 +28,27 @@ public class GameBuilder {
         return new GameSteps();
     }
 
+    @FunctionalInterface
     interface BoardStep {
         CaseStep boardType(BoardType boardType) throws IOException;
     }
 
+    @FunctionalInterface
     interface CaseStep {
         PlayersStep mystery();
     }
 
+    @FunctionalInterface
     interface PlayersStep {
         PositionsStep players(int numberOfPlayers);
     }
 
+    @FunctionalInterface
     interface PositionsStep {
         BuildStep positions();
     }
 
+    @FunctionalInterface
     interface BuildStep {
         Game build();
     }

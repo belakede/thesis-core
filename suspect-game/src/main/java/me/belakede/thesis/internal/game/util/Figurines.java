@@ -45,7 +45,7 @@ public class Figurines {
 
 
     public static Map<Figurine, Field> startingPositions(Board board) {
-        Map<Figurine, Field> figurineFieldMap = new Hashtable<>(getNumberOfFigurines());
+        Map<Figurine, Field> figurineFieldMap = new HashMap<>(getNumberOfFigurines());
         addSuspectsToPositionMap(board, figurineFieldMap);
         addWeaponsToPositionMap(board, figurineFieldMap);
         return figurineFieldMap;
@@ -74,7 +74,7 @@ public class Figurines {
     private static Map<Figurine, Set<Card>> getFigurinesWithEmptyCardSet(int numberOfPlayers) {
         List<Figurine> figurines = new ArrayList<>(SUSPECT_FIGURINES);
         Collections.shuffle(figurines);
-        Map<Figurine, Set<Card>> playersCards = new Hashtable<>(numberOfPlayers);
+        Map<Figurine, Set<Card>> playersCards = new HashMap<>(numberOfPlayers);
         for (int i = 0; i < numberOfPlayers; i++) {
             playersCards.put(figurines.get(i), new HashSet<>());
         }

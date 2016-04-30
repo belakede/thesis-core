@@ -1,4 +1,4 @@
-package me.belakede.thesis.internal.game;
+package me.belakede.thesis.internal.game.util;
 
 import me.belakede.thesis.game.Player;
 import org.junit.Before;

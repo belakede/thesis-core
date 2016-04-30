@@ -1,6 +1,7 @@
-package me.belakede.thesis.internal.game;
+package me.belakede.thesis.internal.game.util;
 
 import me.belakede.thesis.game.Player;
+import me.belakede.thesis.internal.game.PlayerCycle;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,7 +11,7 @@ class DefaultPlayerCycle implements PlayerCycle {
     private final List<Player> players;
     private int index;
 
-    public DefaultPlayerCycle(Player first) {
+    DefaultPlayerCycle(Player first) {
         players = new ArrayList<>(6);
         players.add(first);
         index = 0;

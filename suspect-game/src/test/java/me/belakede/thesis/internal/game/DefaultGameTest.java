@@ -10,6 +10,7 @@ import me.belakede.thesis.internal.game.board.DefaultSecretPassage;
 import me.belakede.thesis.internal.game.board.FieldFactory;
 import me.belakede.thesis.internal.game.equipment.DefaultCase;
 import me.belakede.thesis.internal.game.equipment.DefaultSuspicion;
+import me.belakede.thesis.internal.game.util.Players;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
@@ -229,7 +230,6 @@ public class DefaultGameTest {
         }
         List<Field> fourthExitFields = new ArrayList<>();
         fields[1][1] = FieldFactory.getFieldBySymbol(1, 1, 'R');
-        ;
         fourthExitFields.add(fields[1][1]);
 
         RoomField firstRoom = new DefaultRoomField(Room.BILLIARD_ROOM, firstRoomFields, firstExitFields);
@@ -254,10 +254,7 @@ public class DefaultGameTest {
         Player second = Mockito.mock(Player.class);
         Player third = Mockito.mock(Player.class);
         Player fourth = Mockito.mock(Player.class);
-        PlayerCycle cycle = new DefaultPlayerCycle(first);
-        cycle.append(second);
-        cycle.append(third);
-        cycle.append(fourth);
+        PlayerCycle cycle = Players.createPlayerCycle(first, second, third, fourth);
 
         Map<Figurine, Field> positions = new HashMap<>();
         positions.put(Suspect.GREEN, fields[0][0]);
@@ -275,7 +272,7 @@ public class DefaultGameTest {
         private final PlayerCycle playerCycle;
         private final Map<Figurine, Field> positions;
 
-        public GameTestData(Board board, Field[][] fields, PlayerCycle playerCycle, Map<Figurine, Field> positions) {
+        GameTestData(Board board, Field[][] fields, PlayerCycle playerCycle, Map<Figurine, Field> positions) {
             this.board = board;
             this.fields = fields;
             this.playerCycle = playerCycle;
@@ -286,15 +283,15 @@ public class DefaultGameTest {
             return board;
         }
 
-        public Field[][] getFields() {
+        Field[][] getFields() {
             return fields;
         }
 
-        public PlayerCycle getPlayerCycle() {
+        PlayerCycle getPlayerCycle() {
             return playerCycle;
         }
 
-        public Map<Figurine, Field> getPositions() {
+        Map<Figurine, Field> getPositions() {
             return positions;
         }
     }

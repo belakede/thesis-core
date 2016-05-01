@@ -29,31 +29,31 @@ public class GameBuilder {
     }
 
     @FunctionalInterface
-    interface BoardStep {
+    public interface BoardStep {
         CaseStep boardType(BoardType boardType) throws IOException;
     }
 
     @FunctionalInterface
-    interface CaseStep {
+    public interface CaseStep {
         PlayersStep mystery();
     }
 
     @FunctionalInterface
-    interface PlayersStep {
+    public interface PlayersStep {
         PositionsStep players(int numberOfPlayers);
     }
 
     @FunctionalInterface
-    interface PositionsStep {
+    public interface PositionsStep {
         BuildStep positions();
     }
 
     @FunctionalInterface
-    interface BuildStep {
+    public interface BuildStep {
         Game build();
     }
 
-    private static final class GameSteps implements BoardStep, CaseStep, PlayersStep, PositionsStep, BuildStep {
+    public static final class GameSteps implements BoardStep, CaseStep, PlayersStep, PositionsStep, BuildStep {
 
         private Board board;
         private Case mystery;

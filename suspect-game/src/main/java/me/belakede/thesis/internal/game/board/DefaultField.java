@@ -26,6 +26,16 @@ public final class DefaultField implements Field {
     }
 
     @Override
+    public int getRow() {
+        return row;
+    }
+
+    @Override
+    public int getColumn() {
+        return column;
+    }
+
+    @Override
     public boolean equals(Object o) {
         if (this == o) {
             return true;

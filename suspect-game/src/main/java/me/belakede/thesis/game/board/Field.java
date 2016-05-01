@@ -6,4 +6,8 @@ public interface Field {
 
     boolean canMakeAnAccusation();
 
+    int getColumn();
+
+    int getRow();
+
 }

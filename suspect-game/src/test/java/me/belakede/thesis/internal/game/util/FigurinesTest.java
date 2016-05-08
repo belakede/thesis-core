@@ -54,6 +54,24 @@ public class FigurinesTest {
         expected.remove(mystery.getSuspect());
         expected.remove(mystery.getWeapon());
         assertEquals(expected, actual);
+        assertEquals(21 - 3, expected.size());
+    }
+
+    @Test
+    public void testFigurinesCardsShouldReturnAMapContainsAllCardsExceptTheSpecifiedMysterySeparatedByFigurinesWhenNumberOfPlayersIsFive() {
+        // GIVEN
+        Case mystery = Cases.generate();
+        int numberOfPlayers = 5;
+        // WHEN
+        Set<Card> actual = new HashSet<>();
+        Figurines.cards(numberOfPlayers, mystery).values().forEach(actual::addAll);
+        // THEN
+        Set<Card> expected = new HashSet<>(Cards.values());
+        expected.remove(mystery.getRoom());
+        expected.remove(mystery.getSuspect());
+        expected.remove(mystery.getWeapon());
+        assertEquals(expected, actual);
+        assertEquals(21 - 3, expected.size());
     }
 
     @Test

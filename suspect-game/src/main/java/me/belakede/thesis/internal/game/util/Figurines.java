@@ -37,7 +37,8 @@ public class Figurines {
             playersCards.values().forEach(c -> c.add(cards.remove(0)));
         }
         List<Set<Card>> cardList = new ArrayList<>(playersCards.values());
-        for (int i = 0; i < cards.size(); i++) {
+        int sizeOfCards = cards.size();
+        for (int i = 0; i < sizeOfCards; i++) {
             cardList.get(i).add(cards.remove(0));
         }
         return playersCards;

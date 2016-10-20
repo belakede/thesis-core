@@ -2,8 +2,8 @@ package me.belakede.thesis.internal.game.equipment;
 
 import com.google.code.tempusfugit.concurrency.IntermittentTestRunner;
 import com.google.code.tempusfugit.concurrency.annotations.Intermittent;
-import me.belakede.thesis.game.board.Field;
 import me.belakede.thesis.game.equipment.PairOfDice;
+import me.belakede.thesis.game.equipment.Suspicion;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -41,7 +41,7 @@ public class DefaultPairOfDiceTest {
 
     @Test
     public void testEqualsShouldReturnFalseWhenArgumentIsDifferentType() throws Exception {
-        assertFalse(testSubject.equals(Mockito.mock(Field.class)));
+        assertFalse(testSubject.equals(Mockito.mock(Suspicion.class)));
     }
 
     @Test

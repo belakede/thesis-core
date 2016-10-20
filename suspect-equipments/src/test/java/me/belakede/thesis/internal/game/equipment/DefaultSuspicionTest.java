@@ -1,10 +1,6 @@
 package me.belakede.thesis.internal.game.equipment;
 
-import me.belakede.thesis.game.board.Field;
-import me.belakede.thesis.game.equipment.Room;
-import me.belakede.thesis.game.equipment.Suspect;
-import me.belakede.thesis.game.equipment.Suspicion;
-import me.belakede.thesis.game.equipment.Weapon;
+import me.belakede.thesis.game.equipment.*;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
@@ -33,8 +29,7 @@ public class DefaultSuspicionTest {
 
     @Test
     public void testEqualsShouldReturnFalseWhenArgumentIsDifferentType() throws Exception {
-        Field field = Mockito.mock(Field.class);
-        assertFalse(testSubject.equals(field));
+        assertFalse(testSubject.equals(Mockito.mock(Case.class)));
     }
 
     @Test

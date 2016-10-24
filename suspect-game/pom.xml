@@ -2,24 +2,55 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
     <parent>
         <groupId>me.belakede.thesis</groupId>
         <artifactId>thesis</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
-    <modelVersion>4.0.0</modelVersion>
 
     <groupId>me.belakede.thesis</groupId>
-    <artifactId>suspect-equipments</artifactId>
+    <artifactId>suspect-game</artifactId>
     <version>0.0.1-SNAPSHOT</version>
 
     <properties>
+        <jackson-databind.version>2.8.3</jackson-databind.version>
+        <slf4j.version>1.7.21</slf4j.version>
+        <logback.version>1.1.7</logback.version>
         <mockito.version>1.10.19</mockito.version>
         <junit.version>4.12</junit.version>
         <tempus-fugit.version>1.1</tempus-fugit.version>
     </properties>
 
     <dependencies>
+        <!-- suspect equipments -->
+        <dependency>
+            <groupId>me.belakede.thesis</groupId>
+            <artifactId>suspect-equipments</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>${jackson-databind.version}</version>
+        </dependency>
+        <!-- logging -->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>${slf4j.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-core</artifactId>
+            <version>${logback.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <version>${logback.version}</version>
+        </dependency>
         <!-- testing -->
         <dependency>
             <groupId>junit</groupId>

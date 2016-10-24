@@ -10,8 +10,8 @@
     <packaging>pom</packaging>
 
     <modules>
-        <module>suspect-game</module>
         <module>suspect-equipments</module>
+        <module>suspect-game</module>
     </modules>
 
     <properties>

@@ -57,5 +57,12 @@ public class DefaultCaseTest {
             assertNotEquals(testSubject, actual);
             assertTrue(actual.isSolved());
         }
+
+        @Test
+        public void testEqualsShouldReturnFalseWhenTypeIsDifferent() {
+            Case actual = testSubject.accuse(suspicion);
+            assertFalse(actual.equals(suspicion));
+        }
+
     }
 }

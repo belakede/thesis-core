@@ -45,4 +45,20 @@ public final class DefaultCase implements Case {
         return result;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        DefaultCase that = (DefaultCase) o;
+
+        return solved == that.solved && (suspicion != null ? suspicion.equals(that.suspicion) : that.suspicion == null);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = suspicion != null ? suspicion.hashCode() : 0;
+        result = 31 * result + (solved ? 1 : 0);
+        return result;
+    }
 }

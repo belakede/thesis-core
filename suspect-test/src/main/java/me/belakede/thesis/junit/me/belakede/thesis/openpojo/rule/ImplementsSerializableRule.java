@@ -8,10 +8,12 @@ import java.io.Serializable;
 
 public class ImplementsSerializableRule implements Rule {
 
+    static final String FAILED_MESSAGE = "Pojo class must implements serializable interface.";
+
     @Override
     public void evaluate(PojoClass pojoClass) {
         if (!pojoClass.extendz(Serializable.class)) {
-            Affirm.fail("Pojo class must implements serializable interface.");
+            Affirm.fail(FAILED_MESSAGE);
         }
     }
 }

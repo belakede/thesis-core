@@ -10,7 +10,7 @@ public class ImplementsSerializableRule implements Rule {
 
     @Override
     public void evaluate(PojoClass pojoClass) {
-        if (pojoClass.extendz(Serializable.class)) {
+        if (!pojoClass.extendz(Serializable.class)) {
             Affirm.fail("Pojo class must implements serializable interface.");
         }
     }

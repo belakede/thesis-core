@@ -7,6 +7,7 @@ import com.openpojo.validation.rule.impl.*;
 import com.openpojo.validation.test.impl.GetterTester;
 import com.openpojo.validation.test.impl.SetterTester;
 import junit.framework.TestCase;
+import me.belakede.thesis.junit.me.belakede.thesis.openpojo.rule.ImplementsSerializableRule;
 import org.junit.Test;
 
 public abstract class PojoClassTestCase<T> extends TestCase {
@@ -16,6 +17,12 @@ public abstract class PojoClassTestCase<T> extends TestCase {
     public PojoClassTestCase(String name, Class<T> typeClass) {
         super(name);
         this.typeClass = typeClass;
+    }
+
+    @Test
+    public void testPojoMustImplementsSerializable() {
+        Validator validator = ValidatorBuilder.create().with(new ImplementsSerializableRule()).build();
+        validator.validate(PojoClassFactory.getPojoClass(typeClass));
     }
 
     @Test

@@ -48,6 +48,13 @@
             <artifactId>logback-classic</artifactId>
             <version>${logback.version}</version>
         </dependency>
+        <!-- testing -->
+        <dependency>
+            <groupId>me.belakede.thesis</groupId>
+            <artifactId>suspect-test</artifactId>
+            <version>1.0-SNAPSHOT</version>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
 
 </project>

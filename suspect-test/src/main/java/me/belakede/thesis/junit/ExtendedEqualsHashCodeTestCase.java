@@ -32,12 +32,17 @@ public abstract class ExtendedEqualsHashCodeTestCase<T> extends EqualsHashCodeTe
             try {
                 T instance = (T) createInstance();
                 T secondInstance = (T) createInstance();
-                Field declaredField = typeClass.getField(f);
-                declaredField.setAccessible(true);
-                declaredField.set(instance, null);
+                Field field;
+                try {
+                    field = typeClass.getDeclaredField(f);
+                } catch (NoSuchFieldException ex) {
+                    field = typeClass.getSuperclass().getDeclaredField(f);
+                }
+                field.setAccessible(true);
+                field.set(instance, null);
                 junitx.framework.Assert.assertNotEquals(instance, secondInstance);
                 junitx.framework.Assert.assertNotEquals(secondInstance, instance);
-                declaredField.set(secondInstance, null);
+                field.set(secondInstance, null);
                 junitx.framework.Assert.assertEquals(instance, secondInstance);
                 junitx.framework.Assert.assertEquals(secondInstance, instance);
             } catch (Exception e) {
@@ -51,12 +56,17 @@ public abstract class ExtendedEqualsHashCodeTestCase<T> extends EqualsHashCodeTe
             try {
                 T instance = (T) createInstance();
                 T secondInstance = (T) createInstance();
-                Field declaredField = typeClass.getField(f);
-                declaredField.setAccessible(true);
-                declaredField.set(instance, null);
+                Field field;
+                try {
+                    field = typeClass.getDeclaredField(f);
+                } catch (NoSuchFieldException ex) {
+                    field = typeClass.getSuperclass().getDeclaredField(f);
+                }
+                field.setAccessible(true);
+                field.set(instance, null);
                 junitx.framework.Assert.assertNotEquals(instance.hashCode(), secondInstance.hashCode());
                 junitx.framework.Assert.assertNotEquals(secondInstance.hashCode(), instance.hashCode());
-                declaredField.set(secondInstance, null);
+                field.set(secondInstance, null);
                 junitx.framework.Assert.assertEquals(instance, secondInstance);
                 junitx.framework.Assert.assertEquals(secondInstance, instance);
             } catch (Exception e) {

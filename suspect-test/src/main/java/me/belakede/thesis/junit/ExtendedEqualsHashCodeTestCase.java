@@ -32,7 +32,7 @@ public abstract class ExtendedEqualsHashCodeTestCase<T> extends EqualsHashCodeTe
             try {
                 T instance = (T) createInstance();
                 T secondInstance = (T) createInstance();
-                Field declaredField = typeClass.getDeclaredField(f);
+                Field declaredField = typeClass.getField(f);
                 declaredField.setAccessible(true);
                 declaredField.set(instance, null);
                 junitx.framework.Assert.assertNotEquals(instance, secondInstance);
@@ -51,7 +51,7 @@ public abstract class ExtendedEqualsHashCodeTestCase<T> extends EqualsHashCodeTe
             try {
                 T instance = (T) createInstance();
                 T secondInstance = (T) createInstance();
-                Field declaredField = typeClass.getDeclaredField(f);
+                Field declaredField = typeClass.getField(f);
                 declaredField.setAccessible(true);
                 declaredField.set(instance, null);
                 junitx.framework.Assert.assertNotEquals(instance.hashCode(), secondInstance.hashCode());

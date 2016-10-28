@@ -8,7 +8,7 @@ import com.openpojo.validation.rule.Rule;
 import java.util.ArrayList;
 import java.util.List;
 
-public class NoFieldShadowingExceptSerialVersionUID implements Rule {
+public class NoFieldShadowingExceptSerialVersionUIDRule implements Rule {
 
     @Override
     public void evaluate(PojoClass pojoClass) {

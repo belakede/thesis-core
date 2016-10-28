@@ -36,6 +36,7 @@ public abstract class ExtendedEqualsHashCodeTestCase<T> extends EqualsHashCodeTe
                 try {
                     field = typeClass.getDeclaredField(f);
                 } catch (NoSuchFieldException ex) {
+                    LOGGER.info("testEqualsAgainstNullableFields: not found. Checking superclass");
                     field = typeClass.getSuperclass().getDeclaredField(f);
                 }
                 field.setAccessible(true);
@@ -60,6 +61,7 @@ public abstract class ExtendedEqualsHashCodeTestCase<T> extends EqualsHashCodeTe
                 try {
                     field = typeClass.getDeclaredField(f);
                 } catch (NoSuchFieldException ex) {
+                    LOGGER.info("testHashCodeAgainstNullableFields: not found. Checking superclass");
                     field = typeClass.getSuperclass().getDeclaredField(f);
                 }
                 field.setAccessible(true);

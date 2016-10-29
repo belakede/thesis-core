@@ -9,6 +9,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
 
 public class PlayersTest {
@@ -16,23 +17,26 @@ public class PlayersTest {
     @Test
     public void testCreatePlayerCycleShouldReturnWithAFourElementPlayerCycleWhenCalledWithFourPlayer() {
         // GIVEN
-        Player firstPlayer = Mockito.mock(Player.class);
-        Player secondPlayer = Mockito.mock(Player.class);
-        Player thirdPlayer = Mockito.mock(Player.class);
-        Player fourthPlayer = Mockito.mock(Player.class);
         // WHEN
-        PlayerCycle actual = Players.createPlayerCycle(firstPlayer, secondPlayer, thirdPlayer, fourthPlayer);
+        PlayerCycle actual = Players.createPlayerCycle(Mockito.mock(Player.class),
+                Mockito.mock(Player.class), Mockito.mock(Player.class), Mockito.mock(Player.class));
+        assertEquals(4, actual.getNumberOfPlayers());
+    }
+
+    @Test
+    public void testCreateOrderedPlayerCycleShouldReturnWithAFourElementPlayerCycleWhenCalledWithFourPlayer() {
+        // GIVEN
+        // WHEN
+        PlayerCycle actual = Players.createOrderedPlayerCycle(Mockito.mock(Player.class),
+                Mockito.mock(Player.class), Mockito.mock(Player.class), Mockito.mock(Player.class));
         assertEquals(4, actual.getNumberOfPlayers());
     }
 
     @Test
     public void testCreatePlayerCycleShouldReturnWithAPlayerCycleWhichContainsAllSpecifiedPlayer() {
         // GIVEN
-        Player firstPlayer = Mockito.mock(Player.class);
-        Player secondPlayer = Mockito.mock(Player.class);
-        Player thirdPlayer = Mockito.mock(Player.class);
-        Player fourthPlayer = Mockito.mock(Player.class);
-        List<Player> players = Arrays.asList(firstPlayer, secondPlayer, thirdPlayer, fourthPlayer);
+        List<Player> players = Arrays.asList(Mockito.mock(Player.class),
+                Mockito.mock(Player.class), Mockito.mock(Player.class), Mockito.mock(Player.class));
         // WHEN
         PlayerCycle actual = Players.createPlayerCycle(players);
         // THEN
@@ -40,6 +44,23 @@ public class PlayersTest {
         do {
             assertTrue(players.contains(actual.getCurrent()));
             actual.next();
+        } while (!first.equals(actual.getCurrent()));
+    }
+
+    @Test
+    public void testCreateOrderedPlayerCycleShouldReturnWithAPlayerCycleWhichContainsAllSpecifiedPlayer() {
+        // GIVEN
+        List<Player> players = Arrays.asList(Mockito.mock(Player.class),
+                Mockito.mock(Player.class), Mockito.mock(Player.class), Mockito.mock(Player.class));
+        // WHEN
+        PlayerCycle actual = Players.createOrderedPlayerCycle(players);
+        // THEN
+        int i = 0;
+        Player first = actual.getCurrent();
+        do {
+            assertEquals(players.get(i), actual.getCurrent());
+            actual.next();
+            i++;
         } while (!first.equals(actual.getCurrent()));
     }
 

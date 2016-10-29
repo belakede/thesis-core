@@ -17,12 +17,25 @@ public class Players {
         return createPlayerCycle(Arrays.asList(players));
     }
 
+    public static PlayerCycle createOrderedPlayerCycle(Player... players) {
+        return createOrderedPlayerCycle(Arrays.asList(players));
+    }
+
     public static PlayerCycle createPlayerCycle(List<Player> players) {
         List<Player> playerList = new ArrayList<>(players);
         Collections.shuffle(playerList);
         DefaultPlayerCycle playerCycle = new DefaultPlayerCycle(playerList.remove(0));
         while (!playerList.isEmpty()) {
             Collections.shuffle(playerList);
+            playerCycle.append(playerList.remove(0));
+        }
+        return playerCycle;
+    }
+
+    public static PlayerCycle createOrderedPlayerCycle(List<Player> players) {
+        List<Player> playerList = new ArrayList<>(players);
+        DefaultPlayerCycle playerCycle = new DefaultPlayerCycle(playerList.remove(0));
+        while (!playerList.isEmpty()) {
             playerCycle.append(playerList.remove(0));
         }
         return playerCycle;

@@ -27,6 +27,10 @@ class FieldMatrix {
         initFieldNeighbourhoodMap();
     }
 
+    public Field getField(int row, int column) {
+        return fields[row][column];
+    }
+
     public Set<Field> getStartingFields() {
         return Collections.unmodifiableSet(startingFields);
     }

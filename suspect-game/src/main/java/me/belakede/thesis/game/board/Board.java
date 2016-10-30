@@ -6,6 +6,8 @@ public interface Board {
 
     BoardType getBoardType();
 
+    Field getField(int row, int column);
+
     Set<Field> getStartingFields();
 
     Set<RoomField> getRoomFields();

@@ -35,6 +35,11 @@ public final class DefaultBoard implements Board {
     }
 
     @Override
+    public Field getField(int row, int column) {
+        return fieldMatrix.getField(row, column);
+    }
+
+    @Override
     public Set<Field> getStartingFields() {
         return Collections.unmodifiableSet(fieldMatrix.getStartingFields());
     }

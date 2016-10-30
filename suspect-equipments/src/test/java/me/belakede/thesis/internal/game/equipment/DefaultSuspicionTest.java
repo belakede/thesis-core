@@ -1,7 +1,10 @@
 package me.belakede.thesis.internal.game.equipment;
 
 import junitx.extensions.EqualsHashCodeTestCase;
-import me.belakede.thesis.game.equipment.*;
+import me.belakede.thesis.game.equipment.Room;
+import me.belakede.thesis.game.equipment.Suspect;
+import me.belakede.thesis.game.equipment.Suspicion;
+import me.belakede.thesis.game.equipment.Weapon;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
 

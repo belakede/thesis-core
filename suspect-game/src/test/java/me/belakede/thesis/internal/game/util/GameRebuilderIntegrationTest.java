@@ -7,14 +7,13 @@ import me.belakede.thesis.game.equipment.*;
 import me.belakede.thesis.internal.game.DefaultPlayer;
 import me.belakede.thesis.internal.game.equipment.DefaultCase;
 import me.belakede.thesis.internal.game.equipment.DefaultSuspicion;
-import org.hamcrest.Matchers;
 import org.junit.Test;
 
 import java.io.IOException;
 import java.util.*;
 
-import static org.hamcrest.Matchers.*;
-import static org.junit.Assert.*;
+import static org.hamcrest.Matchers.is;
+import static org.junit.Assert.assertThat;
 
 
 public class GameRebuilderIntegrationTest {

@@ -13,7 +13,10 @@ import me.belakede.thesis.internal.game.PlayerCycle;
 import me.belakede.thesis.internal.game.equipment.DefaultCase;
 
 import java.io.IOException;
-import java.util.*;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 public class GameRebuilder {
 

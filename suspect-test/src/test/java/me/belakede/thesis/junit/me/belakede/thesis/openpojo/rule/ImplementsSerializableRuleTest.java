@@ -8,7 +8,7 @@ import org.mockito.Mockito;
 
 import java.io.Serializable;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertThat;
 
 
 public class ImplementsSerializableRuleTest {

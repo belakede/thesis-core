@@ -6,9 +6,6 @@ import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
 
 import java.util.ArrayList;
-import java.util.Collection;
-
-import static org.junit.Assert.*;
 
 @RunWith(Enclosed.class)
 public class CoordinateTest {

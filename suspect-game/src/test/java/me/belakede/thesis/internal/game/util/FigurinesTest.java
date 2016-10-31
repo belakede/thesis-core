@@ -6,15 +6,44 @@ import me.belakede.thesis.game.equipment.*;
 import org.junit.Assert;
 import org.junit.Test;
 
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.*;
 
 public class FigurinesTest {
+
+    @Test
+    public void testValueOfShouldReturnEmptyOptionalWhenNameIsNull() {
+        // GIVEN
+        String name = null;
+        // WHEN
+        Optional<Figurine> actual = Figurines.valueOf(name);
+        // THEN
+        assertFalse(actual.isPresent());
+    }
+
+    @Test
+    public void testValueOfShouldReturnEmptyOptionalWhenNameIsInvalid() {
+        // GIVEN
+        String name = "";
+        // WHEN
+        Optional<Figurine> actual = Figurines.valueOf(name);
+        // THEN
+        assertFalse(actual.isPresent());
+    }
+
+    @Test
+    public void testValueOfShouldReturnOptionalDescribingEnumConstantWhenNameIsValid() {
+        // GIVEN
+        String name = Weapon.KNIFE.name();
+        // WHEN
+        Optional<Figurine> actual = Figurines.valueOf(name);
+        // THEN
+        Figurine expected = Weapon.KNIFE;
+
+        assertTrue(actual.isPresent());
+        assertEquals(expected, actual.get());
+    }
 
     @Test
     public void testGetNumberOfFigurinesShouldReturnTheNumberOfSuspectsPlusNumberOfWeapons() throws Exception {

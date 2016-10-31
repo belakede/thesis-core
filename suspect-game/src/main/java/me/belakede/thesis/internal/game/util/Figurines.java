@@ -21,6 +21,10 @@ public class Figurines {
     private Figurines() {
     }
 
+    public static Optional<Figurine> valueOf(String name) {
+        return ALL_FIGURINES.stream().filter(figurine -> figurine.name().equalsIgnoreCase(name)).findFirst();
+    }
+
     public static int getNumberOfFigurines() {
         return ALL_FIGURINES.size();
     }

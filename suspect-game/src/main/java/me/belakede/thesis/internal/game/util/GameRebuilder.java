@@ -31,7 +31,7 @@ public class GameRebuilder {
 
     @FunctionalInterface
     public interface CaseStep {
-        PlayersStep mystery(Suspicion suspicion);
+        PlayersStep mystery(Case mystery);
     }
 
     @FunctionalInterface
@@ -63,8 +63,8 @@ public class GameRebuilder {
         }
 
         @Override
-        public PlayersStep mystery(Suspicion suspicion) {
-            mystery = new DefaultCase(suspicion);
+        public PlayersStep mystery(Case oldCase) {
+            mystery = oldCase;
             return this;
         }
 

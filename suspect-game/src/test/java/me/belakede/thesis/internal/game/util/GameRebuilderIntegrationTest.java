@@ -20,12 +20,12 @@ public class GameRebuilderIntegrationTest {
 
     @Test
     public void testCanCreateAValidDefaultGameWithFourPlayer() throws IOException {
-        Suspicion suspicion = new DefaultSuspicion(Suspect.PEACOCK, Room.DINING_ROOM, Weapon.WRENCH);
+        Case mystery = new DefaultCase(new DefaultSuspicion(Suspect.PEACOCK, Room.DINING_ROOM, Weapon.WRENCH));
         List<Coordinate> coordinates = new ArrayList<>(Arrays.asList(new Coordinate(2, 2),
                 new Coordinate(6, 6), new Coordinate(10, 10), new Coordinate(23, 3)));
         List<Player> playerList = new ArrayList<>();
         Map<Figurine, Coordinate> knownPositions = new HashMap<>();
-        Map<Figurine, Set<Card>> figurinesCards = Figurines.cards(4, new DefaultCase(suspicion));
+        Map<Figurine, Set<Card>> figurinesCards = Figurines.cards(4, mystery);
         figurinesCards.entrySet().forEach(e -> {
             playerList.add(new DefaultPlayer((Suspect) e.getKey(), e.getValue()));
             knownPositions.put(e.getKey(), coordinates.get(0));
@@ -34,7 +34,7 @@ public class GameRebuilderIntegrationTest {
         Player currentPlayer = playerList.get(2);
         Game actual = GameRebuilder.create()
                 .boardType(BoardType.DEFAULT)
-                .mystery(suspicion)
+                .mystery(mystery)
                 .players(playerList, currentPlayer)
                 .positions(knownPositions)
                 .build();

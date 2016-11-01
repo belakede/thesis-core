@@ -36,6 +36,11 @@ public final class DefaultGame implements Game {
     }
 
     @Override
+    public Case getMystery() {
+        return mystery;
+    }
+
+    @Override
     public Map<Figurine, Field> getPositions() {
         return Collections.unmodifiableMap(new HashMap<>(positions));
     }

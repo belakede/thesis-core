@@ -1,7 +1,7 @@
 package me.belakede.thesis.internal.game.util;
 
 import me.belakede.thesis.game.board.Board;
-import me.belakede.thesis.game.board.BoardType;
+import me.belakede.thesis.game.equipment.BoardType;
 import me.belakede.thesis.internal.game.importer.MapLoader;
 
 import java.io.IOException;

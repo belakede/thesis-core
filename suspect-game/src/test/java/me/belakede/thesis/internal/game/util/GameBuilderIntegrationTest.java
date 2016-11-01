@@ -1,7 +1,7 @@
 package me.belakede.thesis.internal.game.util;
 
 import me.belakede.thesis.game.Game;
-import me.belakede.thesis.game.board.BoardType;
+import me.belakede.thesis.game.equipment.BoardType;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;

@@ -1,7 +1,7 @@
 package me.belakede.thesis.internal.game.importer;
 
 import me.belakede.thesis.game.board.Board;
-import me.belakede.thesis.game.board.BoardType;
+import me.belakede.thesis.game.equipment.BoardType;
 import me.belakede.thesis.game.board.Field;
 import me.belakede.thesis.game.board.RoomField;
 import me.belakede.thesis.game.equipment.Room;

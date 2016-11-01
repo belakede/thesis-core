@@ -1,5 +1,7 @@
 package me.belakede.thesis.game.board;
 
+import me.belakede.thesis.game.equipment.BoardType;
+
 import java.util.Set;
 
 public interface Board {

@@ -1,4 +1,4 @@
-package me.belakede.thesis.game.board;
+package me.belakede.thesis.game.equipment;
 
 public enum BoardType {
 

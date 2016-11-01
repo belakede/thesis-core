@@ -1,6 +1,7 @@
 package me.belakede.thesis.internal.game.board;
 
 import me.belakede.thesis.game.board.*;
+import me.belakede.thesis.game.equipment.BoardType;
 import me.belakede.thesis.game.equipment.Room;
 import org.junit.Test;
 import org.mockito.Mockito;

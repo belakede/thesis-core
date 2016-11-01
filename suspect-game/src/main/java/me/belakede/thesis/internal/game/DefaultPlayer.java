@@ -25,7 +25,7 @@ public final class DefaultPlayer implements Player {
     public DefaultPlayer(Suspect figurine, Set<Card> cards, boolean alive) {
         this.figurine = figurine;
         this.cards = new HashSet<>(cards);
-        this.madeGroundlessAccusation = alive;
+        this.madeGroundlessAccusation = !alive;
     }
 
     @Override

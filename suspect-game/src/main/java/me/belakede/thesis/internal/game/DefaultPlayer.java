@@ -22,6 +22,12 @@ public final class DefaultPlayer implements Player {
         this.madeGroundlessAccusation = false;
     }
 
+    public DefaultPlayer(Suspect figurine, Set<Card> cards, boolean alive) {
+        this.figurine = figurine;
+        this.cards = new HashSet<>(cards);
+        this.madeGroundlessAccusation = alive;
+    }
+
     @Override
     public void makeGroundlessAccusation() {
         madeGroundlessAccusation = true;

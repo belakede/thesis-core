@@ -11,12 +11,10 @@ import static org.junit.Assert.assertThat;
 
 public abstract class JacksonSerializationTestCase<T> extends TestCase {
 
-    private final Class<T> type;
     private ObjectMapper objectMapper;
 
-    public JacksonSerializationTestCase(String name, Class<T> type) {
+    public JacksonSerializationTestCase(String name) {
         super(name);
-        this.type = type;
         this.objectMapper = new ObjectMapper();
     }
 
@@ -32,7 +30,7 @@ public abstract class JacksonSerializationTestCase<T> extends TestCase {
 
     public final void testJacksonDeserialization() throws Exception {
         T expected = expectedObject();
-        T actual = toObject(expectedJson());
+        T actual = toObject(expectedJson(), (Class<T>) expected.getClass());
         assertThat(actual, is(expected));
     }
 
@@ -40,7 +38,7 @@ public abstract class JacksonSerializationTestCase<T> extends TestCase {
         return objectMapper.writeValueAsString(t);
     }
 
-    private T toObject(String json) throws IOException {
+    private T toObject(String json, Class<T> type) throws IOException {
         return objectMapper.readValue(json, type);
     }
 

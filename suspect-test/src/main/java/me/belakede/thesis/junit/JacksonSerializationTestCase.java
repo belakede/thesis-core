@@ -5,7 +5,10 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import junit.framework.TestCase;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collection;
 
+import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 
@@ -22,10 +25,18 @@ public abstract class JacksonSerializationTestCase<T> extends TestCase {
 
     public abstract String expectedJson();
 
+    public Collection<String> jsonContains() {
+        return new ArrayList<>();
+    }
+
     public final void testJacksonSerialization() throws Exception {
         String expected = expectedJson();
         String actual = toJson(expectedObject());
-        assertThat(actual, is(expected));
+        if (jsonContains().isEmpty()) {
+            assertThat(actual, is(expected));
+        } else {
+            jsonContains().forEach(s -> assertThat(actual, containsString(s)));
+        }
     }
 
     public final void testJacksonDeserialization() throws Exception {

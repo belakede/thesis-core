@@ -1,6 +1,7 @@
 package me.belakede.thesis.game.board;
 
 import me.belakede.thesis.game.equipment.BoardType;
+import me.belakede.thesis.game.field.Field;
 
 import java.util.Set;
 

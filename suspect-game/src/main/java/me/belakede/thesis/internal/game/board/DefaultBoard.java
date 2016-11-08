@@ -1,7 +1,10 @@
 package me.belakede.thesis.internal.game.board;
 
-import me.belakede.thesis.game.board.*;
+import me.belakede.thesis.game.board.Board;
+import me.belakede.thesis.game.board.RoomField;
+import me.belakede.thesis.game.board.SecretPassage;
 import me.belakede.thesis.game.equipment.BoardType;
+import me.belakede.thesis.game.field.Field;
 
 import java.util.Collections;
 import java.util.HashSet;

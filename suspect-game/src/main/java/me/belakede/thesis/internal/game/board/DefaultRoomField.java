@@ -1,8 +1,8 @@
 package me.belakede.thesis.internal.game.board;
 
-import me.belakede.thesis.game.board.Field;
 import me.belakede.thesis.game.board.RoomField;
 import me.belakede.thesis.game.equipment.Room;
+import me.belakede.thesis.game.field.Field;
 
 import java.util.Collection;
 import java.util.Collections;

@@ -1,12 +1,12 @@
 package me.belakede.thesis.internal.game.importer.transformer;
 
-import me.belakede.thesis.game.board.Field;
 import me.belakede.thesis.game.board.RoomField;
 import me.belakede.thesis.game.board.SecretPassage;
 import me.belakede.thesis.game.equipment.Room;
+import me.belakede.thesis.game.field.Field;
 import me.belakede.thesis.internal.game.board.DefaultRoomField;
 import me.belakede.thesis.internal.game.board.DefaultSecretPassage;
-import me.belakede.thesis.internal.game.board.FieldFactory;
+import me.belakede.thesis.internal.game.field.FieldFactory;
 import me.belakede.thesis.internal.game.importer.domain.RoomDescription;
 import me.belakede.thesis.internal.game.importer.domain.RoomFieldDescriptor;
 import me.belakede.thesis.internal.game.importer.domain.SecretPassageDescriptor;

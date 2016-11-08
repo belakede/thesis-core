@@ -1,8 +1,8 @@
 package me.belakede.thesis.internal.game.util;
 
 import me.belakede.thesis.game.board.Board;
-import me.belakede.thesis.game.board.Field;
 import me.belakede.thesis.game.equipment.*;
+import me.belakede.thesis.game.field.Field;
 import org.junit.Assert;
 import org.junit.Test;
 

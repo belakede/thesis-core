@@ -1,12 +1,12 @@
 package me.belakede.thesis.internal.game.board;
 
 import junitx.extensions.EqualsHashCodeTestCase;
-import me.belakede.thesis.game.board.Field;
-import me.belakede.thesis.game.board.FieldType;
 import me.belakede.thesis.game.board.RoomField;
 import me.belakede.thesis.game.board.SecretPassage;
 import me.belakede.thesis.game.equipment.Room;
 import me.belakede.thesis.game.equipment.Suspicion;
+import me.belakede.thesis.game.field.Field;
+import me.belakede.thesis.internal.game.field.FieldFactory;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
@@ -33,17 +33,17 @@ public class DefaultSecretPassageTest {
         @Override
         protected DefaultSecretPassage createInstance() throws Exception {
             Set<Field> fromFields = new HashSet<>(Arrays.asList(
-                    new DefaultField(FieldType.ROOM, 1, 1), new DefaultField(FieldType.ROOM, 1, 2)
+                    FieldFactory.getFieldBySymbol(1, 1, 'R'), FieldFactory.getFieldBySymbol(1, 2, 'R')
             ));
             Set<Field> fromExitFields = new HashSet<>(Arrays.asList(
-                    new DefaultField(FieldType.ROOM, 2, 1), new DefaultField(FieldType.ROOM, 2, 2)
+                    FieldFactory.getFieldBySymbol(2, 1, 'R'), FieldFactory.getFieldBySymbol(2, 2, 'R')
             ));
             DefaultRoomField from = new DefaultRoomField(Room.BILLIARD_ROOM, fromFields, fromExitFields);
             Set<Field> toFields = new HashSet<>(Arrays.asList(
-                    new DefaultField(FieldType.ROOM, 10, 9), new DefaultField(FieldType.ROOM, 10, 10)
+                    FieldFactory.getFieldBySymbol(10, 9, 'R'), FieldFactory.getFieldBySymbol(10, 10, 'R')
             ));
             Set<Field> toExitFields = new HashSet<>(Arrays.asList(
-                    new DefaultField(FieldType.ROOM, 9, 9), new DefaultField(FieldType.ROOM, 9, 10)
+                    FieldFactory.getFieldBySymbol(9, 9, 'R'), FieldFactory.getFieldBySymbol(9, 10, 'R')
             ));
             DefaultRoomField to = new DefaultRoomField(Room.BALLROOM, toFields, toExitFields);
             return new DefaultSecretPassage(from, to);
@@ -52,17 +52,17 @@ public class DefaultSecretPassageTest {
         @Override
         protected DefaultSecretPassage createNotEqualInstance() throws Exception {
             Set<Field> fromFields = new HashSet<>(Arrays.asList(
-                    new DefaultField(FieldType.ROOM, 5, 5), new DefaultField(FieldType.ROOM, 5, 6)
+                    FieldFactory.getFieldBySymbol(5, 5, 'R'), FieldFactory.getFieldBySymbol(5, 6, 'R')
             ));
             Set<Field> fromExitFields = new HashSet<>(Arrays.asList(
-                    new DefaultField(FieldType.ROOM, 6, 5), new DefaultField(FieldType.ROOM, 6, 6)
+                    FieldFactory.getFieldBySymbol(6, 5, 'R'), FieldFactory.getFieldBySymbol(6, 6, 'R')
             ));
             DefaultRoomField from = new DefaultRoomField(Room.KITCHEN, fromFields, fromExitFields);
             Set<Field> toFields = new HashSet<>(Arrays.asList(
-                    new DefaultField(FieldType.ROOM, 10, 1), new DefaultField(FieldType.ROOM, 10, 2)
+                    FieldFactory.getFieldBySymbol(10, 1, 'R'), FieldFactory.getFieldBySymbol(10, 2, 'R')
             ));
             Set<Field> toExitFields = new HashSet<>(Arrays.asList(
-                    new DefaultField(FieldType.ROOM, 9, 1), new DefaultField(FieldType.ROOM, 9, 2)
+                    FieldFactory.getFieldBySymbol(9, 1, 'R'), FieldFactory.getFieldBySymbol(9, 2, 'R')
             ));
             DefaultRoomField to = new DefaultRoomField(Room.BATHROOM, toFields, toExitFields);
             return new DefaultSecretPassage(from, to);

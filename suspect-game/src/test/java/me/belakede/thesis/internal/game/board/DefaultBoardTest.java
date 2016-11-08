@@ -1,8 +1,12 @@
 package me.belakede.thesis.internal.game.board;
 
-import me.belakede.thesis.game.board.*;
+import me.belakede.thesis.game.board.Board;
+import me.belakede.thesis.game.board.RoomField;
+import me.belakede.thesis.game.board.SecretPassage;
 import me.belakede.thesis.game.equipment.BoardType;
 import me.belakede.thesis.game.equipment.Room;
+import me.belakede.thesis.game.field.Field;
+import me.belakede.thesis.internal.game.field.FieldFactory;
 import org.junit.Test;
 import org.mockito.Mockito;
 
@@ -234,33 +238,33 @@ public class DefaultBoardTest {
         Field[][] fields = new Field[size][size];
         for (int i = 0; i < size; i++) {
             for (int j = 0; j < size; j++) {
-                fields[i][j] = new DefaultField(FieldType.SIMPLE, i, j);
+                fields[i][j] = FieldFactory.getFieldBySymbol(i, j, 'S');
             }
         }
         List<Field> firstRoomFields = new ArrayList<>();
         List<Field> secondRoomFields = new ArrayList<>();
         for (int i = 0; i < 3; i++) {
             for (int j = 6; j < size; j++) {
-                fields[i][j] = new DefaultField(FieldType.ROOM, i, j);
-                fields[j][i] = new DefaultField(FieldType.ROOM, i, j);
+                fields[i][j] = FieldFactory.getFieldBySymbol(i, j, 'R');
+                fields[j][i] = FieldFactory.getFieldBySymbol(i, j, 'R');
                 firstRoomFields.add(fields[j][i]);
                 secondRoomFields.add(fields[i][j]);
             }
         }
         for (int i = 0; i < 4; i++) {
-            fields[i][5] = new DefaultField(FieldType.WALL, i, 5);
-            fields[5][i] = new DefaultField(FieldType.WALL, 5, i);
+            fields[i][5] = FieldFactory.getFieldBySymbol(i, 5, 'W');
+            fields[5][i] = FieldFactory.getFieldBySymbol(5, i, 'W');
         }
         for (int j = 6; j < size; j++) {
-            fields[j][3] = new DefaultField(FieldType.WALL, 3, j);
-            fields[3][j] = new DefaultField(FieldType.WALL, j, 3);
+            fields[j][3] = FieldFactory.getFieldBySymbol(3, j, 'W');
+            fields[3][j] = FieldFactory.getFieldBySymbol(j, 3, 'W');
         }
         List<Field> firstExitFields = new ArrayList<>();
         List<Field> secondExitFields = new ArrayList<>();
-        fields[5][1] = new DefaultField(FieldType.ROOM, 5, 1);
-        fields[7][3] = new DefaultField(FieldType.ROOM, 7, 3);
-        fields[1][5] = new DefaultField(FieldType.ROOM, 1, 5);
-        fields[3][7] = new DefaultField(FieldType.ROOM, 3, 7);
+        fields[5][1] = FieldFactory.getFieldBySymbol(5, 1, 'R');
+        fields[7][3] = FieldFactory.getFieldBySymbol(7, 3, 'R');
+        fields[1][5] = FieldFactory.getFieldBySymbol(1, 5, 'R');
+        fields[3][7] = FieldFactory.getFieldBySymbol(3, 7, 'R');
         firstExitFields.add(fields[5][1]);
         firstExitFields.add(fields[7][3]);
         secondExitFields.add(fields[1][5]);
@@ -269,30 +273,30 @@ public class DefaultBoardTest {
         List<Field> thirdRoomFields = new ArrayList<>();
         for (int i = 7; i < size; i++) {
             for (int j = 7; j < size; j++) {
-                fields[i][j] = new DefaultField(FieldType.ROOM, i, j);
+                fields[i][j] = FieldFactory.getFieldBySymbol(i, j, 'R');
                 thirdRoomFields.add(fields[i][j]);
             }
         }
         List<Field> thirdExitFields = new ArrayList<>();
-        fields[6][8] = new DefaultField(FieldType.ROOM, 6, 8);
+        fields[6][8] = FieldFactory.getFieldBySymbol(6, 8, 'R');
         thirdExitFields.add(fields[6][8]);
         for (int i = 6; i < size; i++) {
-            fields[i][6] = new DefaultField(FieldType.WALL, i, 6);
+            fields[i][6] = FieldFactory.getFieldBySymbol(i, 6, 'W');
         }
-        fields[6][7] = new DefaultField(FieldType.WALL, 6, 7);
+        fields[6][7] = FieldFactory.getFieldBySymbol(6, 7, 'W');
 
         List<Field> fourthRoomFields = new ArrayList<>();
         for (int i = 0; i < 3; i++) {
             for (int j = 1; j < 4; j++) {
-                fields[i][j] = new DefaultField(FieldType.WALL, i, j);
+                fields[i][j] = FieldFactory.getFieldBySymbol(i, j, 'W');
             }
         }
         for (int i = 0; i < 2; i++) {
-            fields[i][2] = new DefaultField(FieldType.ROOM, i, 2);
+            fields[i][2] = FieldFactory.getFieldBySymbol(i, 2, 'R');
             fourthRoomFields.add(fields[i][2]);
         }
         List<Field> fourthExitFields = new ArrayList<>();
-        fields[1][1] = new DefaultField(FieldType.ROOM, 1, 1);
+        fields[1][1] = FieldFactory.getFieldBySymbol(1, 1, 'R');
         fourthExitFields.add(fields[1][1]);
 
         RoomField firstRoom = new DefaultRoomField(Room.BILLIARD_ROOM, firstRoomFields, firstExitFields);

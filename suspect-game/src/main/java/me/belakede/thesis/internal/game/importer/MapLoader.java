@@ -3,9 +3,9 @@ package me.belakede.thesis.internal.game.importer;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import me.belakede.thesis.game.board.Board;
 import me.belakede.thesis.game.equipment.BoardType;
-import me.belakede.thesis.game.board.Field;
+import me.belakede.thesis.game.field.Field;
 import me.belakede.thesis.internal.game.board.DefaultBoard;
-import me.belakede.thesis.internal.game.board.FieldFactory;
+import me.belakede.thesis.internal.game.field.FieldFactory;
 import me.belakede.thesis.internal.game.importer.domain.RoomDescription;
 import me.belakede.thesis.internal.game.importer.transformer.DescriptorTransformer;
 

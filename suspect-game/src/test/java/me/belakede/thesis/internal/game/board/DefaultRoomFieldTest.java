@@ -1,10 +1,10 @@
 package me.belakede.thesis.internal.game.board;
 
 import junitx.extensions.EqualsHashCodeTestCase;
-import me.belakede.thesis.game.board.Field;
-import me.belakede.thesis.game.board.FieldType;
 import me.belakede.thesis.game.board.RoomField;
 import me.belakede.thesis.game.equipment.Room;
+import me.belakede.thesis.game.field.Field;
+import me.belakede.thesis.internal.game.field.FieldFactory;
 import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
@@ -28,12 +28,12 @@ public class DefaultRoomFieldTest {
         @Override
         protected DefaultRoomField createInstance() throws Exception {
             Set<Field> fields = new HashSet<>(Arrays.asList(
-                    new DefaultField(FieldType.ROOM, 1, 1), new DefaultField(FieldType.ROOM, 1, 2),
-                    new DefaultField(FieldType.ROOM, 2, 1), new DefaultField(FieldType.ROOM, 2, 2),
-                    new DefaultField(FieldType.ROOM, 3, 1), new DefaultField(FieldType.ROOM, 3, 2)
+                    FieldFactory.getFieldBySymbol(1, 1, 'R'), FieldFactory.getFieldBySymbol(1, 2, 'R'),
+                    FieldFactory.getFieldBySymbol(2, 1, 'R'), FieldFactory.getFieldBySymbol(2, 2, 'R'),
+                    FieldFactory.getFieldBySymbol(3, 1, 'R'), FieldFactory.getFieldBySymbol(3, 2, 'R')
             ));
             Set<Field> exitFields = new HashSet<>(Arrays.asList(
-                    new DefaultField(FieldType.ROOM, 4, 1), new DefaultField(FieldType.ROOM, 4, 2)
+                    FieldFactory.getFieldBySymbol(4, 1, 'R'), FieldFactory.getFieldBySymbol(4, 2, 'R')
             ));
             return new DefaultRoomField(Room.BILLIARD_ROOM, fields, exitFields);
         }
@@ -41,11 +41,11 @@ public class DefaultRoomFieldTest {
         @Override
         protected DefaultRoomField createNotEqualInstance() throws Exception {
             Set<Field> fields = new HashSet<>(Arrays.asList(
-                    new DefaultField(FieldType.ROOM, 2, 2), new DefaultField(FieldType.ROOM, 2, 3),
-                    new DefaultField(FieldType.ROOM, 3, 2), new DefaultField(FieldType.ROOM, 3, 3)
+                    FieldFactory.getFieldBySymbol(2, 2, 'R'), FieldFactory.getFieldBySymbol(2, 3, 'R'),
+                    FieldFactory.getFieldBySymbol(3, 2, 'R'), FieldFactory.getFieldBySymbol(3, 3, 'R')
             ));
             Set<Field> exitFields = new HashSet<>(Arrays.asList(
-                    new DefaultField(FieldType.ROOM, 4, 2), new DefaultField(FieldType.ROOM, 4, 3)
+                    FieldFactory.getFieldBySymbol(4, 2, 'R'), FieldFactory.getFieldBySymbol(4, 3, 'R')
             ));
             return new DefaultRoomField(Room.BILLIARD_ROOM, fields, exitFields);
         }

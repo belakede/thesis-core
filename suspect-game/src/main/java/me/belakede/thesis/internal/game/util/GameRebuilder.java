@@ -3,10 +3,10 @@ package me.belakede.thesis.internal.game.util;
 import me.belakede.thesis.game.Game;
 import me.belakede.thesis.game.Player;
 import me.belakede.thesis.game.board.Board;
-import me.belakede.thesis.game.board.Field;
 import me.belakede.thesis.game.equipment.BoardType;
 import me.belakede.thesis.game.equipment.Case;
 import me.belakede.thesis.game.equipment.Figurine;
+import me.belakede.thesis.game.field.Field;
 import me.belakede.thesis.internal.game.DefaultGame;
 import me.belakede.thesis.internal.game.PlayerCycle;
 

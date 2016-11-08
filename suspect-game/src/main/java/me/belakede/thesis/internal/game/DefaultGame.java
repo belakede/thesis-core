@@ -3,8 +3,8 @@ package me.belakede.thesis.internal.game;
 import me.belakede.thesis.game.Game;
 import me.belakede.thesis.game.Player;
 import me.belakede.thesis.game.board.Board;
-import me.belakede.thesis.game.board.Field;
 import me.belakede.thesis.game.equipment.*;
+import me.belakede.thesis.game.field.Field;
 import me.belakede.thesis.internal.game.equipment.DefaultPairOfDice;
 import me.belakede.thesis.internal.game.util.Cases;
 

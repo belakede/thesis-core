@@ -1,7 +1,7 @@
 package me.belakede.thesis.internal.game.board;
 
-import me.belakede.thesis.game.board.Field;
-import me.belakede.thesis.game.board.FieldType;
+import me.belakede.thesis.game.field.Field;
+import me.belakede.thesis.game.field.FieldType;
 
 import java.util.*;
 

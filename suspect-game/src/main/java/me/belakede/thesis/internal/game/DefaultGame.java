@@ -97,13 +97,17 @@ public final class DefaultGame implements Game {
         Weapon weapon = suspicion.getWeapon();
         Set<Field> fields = findRoomFieldByRoom(suspicion.getRoom());
         if (!fields.isEmpty()) {
-            Optional<Field> firstEmptyField = fields.stream().filter(f -> !positions.containsValue(f)).findFirst();
-            if (!firstEmptyField.isPresent()) {
-                firstEmptyField = fields.stream().findAny();
-            }
-            positions.put(suspect, firstEmptyField.get());
-            positions.put(weapon, firstEmptyField.get());
+            positions.put(suspect, changePosition(fields));
+            positions.put(weapon, changePosition(fields));
         }
+    }
+
+    private Field changePosition(Collection<Field> fields) {
+        Optional<Field> firstEmptyField = fields.stream().filter(f -> !positions.containsValue(f)).findFirst();
+        if (!firstEmptyField.isPresent()) {
+            firstEmptyField = fields.stream().findAny();
+        }
+        return firstEmptyField.get();
     }
 
     private void changeMysteryBySuspicion(Suspicion suspicion) {

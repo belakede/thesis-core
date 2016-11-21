@@ -65,7 +65,7 @@ public final class DefaultBoard implements Board {
         Set<Field> fromFields = getAllFields(from);
         Set<Field> availableFields = new HashSet<>();
         availableFields.addAll(getRoomFields(from));
-        fromFields.stream().map(f -> fieldMatrix.getAvailableFields(from, step)).forEach(availableFields::addAll);
+        fromFields.stream().map(f -> fieldMatrix.getAvailableFields(f, step)).forEach(availableFields::addAll);
         return Collections.unmodifiableSet(availableFields);
     }
 

@@ -59,6 +59,7 @@ public class Figurines {
     private static void addWeaponsToPositionMap(Board board, Map<Figurine, Field> figurineFieldMap) {
         List<Field> roomFields = new ArrayList<>();
         board.getRoomFields().forEach(rf -> roomFields.addAll(rf.getFields()));
+        board.getRoomFields().forEach(rf -> roomFields.removeAll(rf.getExitFields()));
         List<Weapon> weapons = new ArrayList<>(WEAPON_FIGURINES);
         while (!weapons.isEmpty()) {
             Collections.shuffle(roomFields);

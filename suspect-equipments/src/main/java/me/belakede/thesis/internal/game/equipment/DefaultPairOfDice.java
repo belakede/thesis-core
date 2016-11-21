@@ -20,6 +20,10 @@ public final class DefaultPairOfDice implements PairOfDice {
         return new DefaultPairOfDice(random.nextInt(6) + 1, random.nextInt(6) + 1);
     }
 
+    public static PairOfDice create(int first, int second) {
+        return new DefaultPairOfDice(first, second);
+    }
+
     @Override
     public int getFirst() {
         return first;

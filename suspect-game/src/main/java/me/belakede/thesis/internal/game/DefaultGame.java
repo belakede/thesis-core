@@ -96,10 +96,13 @@ public final class DefaultGame implements Game {
     private void changePositionsBySuspicion(Suspicion suspicion) {
         Suspect suspect = suspicion.getSuspect();
         Weapon weapon = suspicion.getWeapon();
-        Set<Field> fields = findRoomFieldByRoom(suspicion.getRoom());
-        if (!fields.isEmpty()) {
-            positions.put(suspect, changePosition(fields));
-            positions.put(weapon, changePosition(fields));
+        Optional<RoomField> roomField = findRoomFieldByRoom(suspicion.getRoom());
+        if (roomField.isPresent()) {
+            Set<Field> fields = new HashSet<>(roomField.get().getFields());
+            Set<Field> innerFields = new HashSet<>(fields);
+            innerFields.removeAll(roomField.get().getExitFields());
+            changeFigurinePositionIfNecessary(suspect, fields, positions.get(suspect), changePosition(innerFields));
+            changeFigurinePositionIfNecessary(weapon, fields, positions.get(weapon), changePosition(innerFields));
         }
     }
 
@@ -121,14 +124,14 @@ public final class DefaultGame implements Game {
         }
     }
 
-    private Set<Field> findRoomFieldByRoom(Room room) {
-        Set<Field> fields = new HashSet<>();
-        Optional<RoomField> roomField = board.getRoomFields().stream()
+    private Optional<RoomField> findRoomFieldByRoom(Room room) {
+        return board.getRoomFields().stream()
                 .filter(rf -> rf.getRoom().equals(room)).findFirst();
-        if (roomField.isPresent()) {
-            roomField.get().getFields().forEach(fields::add);
-            roomField.get().getExitFields().forEach(fields::remove);
+    }
+
+    private void changeFigurinePositionIfNecessary(Figurine figurine, Set<Field> fields, Field o, Field value) {
+        if (!fields.contains(o)) {
+            positions.put(figurine, value);
         }
-        return fields;
     }
 }

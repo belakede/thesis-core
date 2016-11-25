@@ -3,6 +3,7 @@ package me.belakede.thesis.internal.game;
 import me.belakede.thesis.game.Game;
 import me.belakede.thesis.game.Player;
 import me.belakede.thesis.game.board.Board;
+import me.belakede.thesis.game.board.RoomField;
 import me.belakede.thesis.game.equipment.*;
 import me.belakede.thesis.game.field.Field;
 import me.belakede.thesis.internal.game.equipment.DefaultPairOfDice;
@@ -122,10 +123,12 @@ public final class DefaultGame implements Game {
 
     private Set<Field> findRoomFieldByRoom(Room room) {
         Set<Field> fields = new HashSet<>();
-        board.getRoomFields().stream()
-                .filter(rf -> rf.getRoom().equals(room))
-                .map(rf -> rf.getFields())
-                .forEach(fields::addAll);
+        Optional<RoomField> roomField = board.getRoomFields().stream()
+                .filter(rf -> rf.getRoom().equals(room)).findFirst();
+        if (roomField.isPresent()) {
+            roomField.get().getFields().forEach(fields::add);
+            roomField.get().getExitFields().forEach(fields::remove);
+        }
         return fields;
     }
 }

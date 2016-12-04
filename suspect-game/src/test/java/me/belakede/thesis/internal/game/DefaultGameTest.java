@@ -83,25 +83,6 @@ public class DefaultGameTest {
     }
 
     @Test
-    public void testAccuseShouldChangeTheSuspectAndTheWeaponFigurinesPositionToTheSpecifiedRoom() throws Exception {
-        // GIVEN
-        Suspicion suspicion = new DefaultSuspicion(Suspect.GREEN, Room.BILLIARD_ROOM, Weapon.KNIFE);
-        Optional<RoomField> optionalBilliardRoom = testData.getBoard().getRoomFields().stream().filter(rf -> Room.BILLIARD_ROOM.equals(rf.getRoom())).findFirst();
-        if (!optionalBilliardRoom.isPresent()) {
-            fail("There is no billiard room");
-        }
-        RoomField billiardRoom = optionalBilliardRoom.get();
-        // WHEN
-        Map<Figurine, Field> previous = testSubject.getPositions();
-        testSubject.accuse(suspicion);
-        // THEN
-        Map<Figurine, Field> actual = testSubject.getPositions();
-        assertNotEquals(previous, actual);
-        assertTrue(billiardRoom.isPartOfRoom(actual.get(Suspect.GREEN)));
-        assertTrue(billiardRoom.isPartOfRoom(actual.get(Weapon.KNIFE)));
-    }
-
-    @Test
     public void testIsGameEndedShouldReturnFalseAfterAccuseIsInCorrect() throws Exception {
         // GIVEN
         Suspicion suspicion = new DefaultSuspicion(Suspect.GREEN, Room.DINING_ROOM, Weapon.ROPE);

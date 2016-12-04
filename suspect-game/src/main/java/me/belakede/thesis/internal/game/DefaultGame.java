@@ -78,7 +78,6 @@ public final class DefaultGame implements Game {
 
     @Override
     public void accuse(Suspicion suspicion) {
-        changePositionsBySuspicion(suspicion);
         changeMysteryBySuspicion(suspicion);
         changePlayerStatusIfMadeGroundlessAccusation();
     }

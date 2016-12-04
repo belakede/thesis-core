@@ -26,7 +26,7 @@ class DefaultPlayerCycle implements PlayerCycle {
     public void next() {
         if (hasNext()) {
             do {
-                index = getNextIndex();
+                index = getNextIndex(index);
             } while (getCurrent().hasBeenMadeGroundlessAccusation());
         }
     }
@@ -60,16 +60,16 @@ class DefaultPlayerCycle implements PlayerCycle {
 
     @Override
     public Player getNext() {
-        int nextIndex = 0;
+        int nextIndex = index;
         if (hasNext()) {
             do {
-                nextIndex = nextIndex + getNextIndex();
+                nextIndex = getNextIndex(nextIndex);
             } while (players.get(nextIndex).hasBeenMadeGroundlessAccusation());
         }
         return players.get(nextIndex);
     }
 
-    private int getNextIndex() {
+    private int getNextIndex(int index) {
         return (index + 1 == players.size()) ? 0 : index + 1;
     }
 

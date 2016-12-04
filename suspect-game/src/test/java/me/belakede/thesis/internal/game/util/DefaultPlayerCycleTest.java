@@ -94,6 +94,24 @@ public class DefaultPlayerCycleTest {
     }
 
     @Test
+    public void testGetNextShouldReturnWithThirdPlayerAfterFirstWhenSecondPlayerMadeGroundlessAccusation() throws Exception {
+        // GIVEN
+        Player second = Mockito.mock(Player.class);
+        Player third = Mockito.mock(Player.class);
+        // WHEN
+        testSubject.append(second);
+        testSubject.append(third);
+        Mockito.when(first.hasBeenMadeGroundlessAccusation()).thenReturn(false);
+        Mockito.when(second.hasBeenMadeGroundlessAccusation()).thenReturn(true);
+        Mockito.when(third.hasBeenMadeGroundlessAccusation()).thenReturn(false);
+        // THEN
+        Player expected = third;
+        Player actual = testSubject.getNext();
+        assertEquals(expected, actual);
+    }
+
+
+    @Test
     public void testGetCurrentShouldBeReturnWithSecondPlayerAfterInvokeNext() throws Exception {
         // GIVEN
         Player second = Mockito.mock(Player.class);
